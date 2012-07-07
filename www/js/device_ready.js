@@ -4,25 +4,33 @@
 $(document).ready(function() 
 {
 	// デバイスの準備ができたか
-	document.addEventListener("deviceready", function() 
+	document.addEventListener('deviceready', function() 
 	{
 		// デバイス準備OK
 		
 		// カメラをクリック
-		$("#camera").click( function()
+		$('#camera').click(function()
 		{
 			// カメラ起動
-			navigator.camera.getPicture( function(data) 
+			navigator.camera.getPicture(function(data)
 			{
-				$("#image").attr("src", "data:image/jpeg;base64," + data);
+				$('#image1').attr('src', 'data:image/jpeg;base64,' + data);
 			}, 
 			// 失敗時
 			function (err_message) {
-				//alert("camera error:" + err_message);
-				alert("カメラで写真を撮るときに失敗しました。");
+				if (err_message != 'no image selected') 
+				{
+					alert('カメラで写真を撮るときに失敗しました。');
+				}
 			}, 
 			// クオリティ
-			{ quality: 60, destinationType: Camera.DestinationType.DATA_URL });
+			{ quality: 20, allowEdit: true ,destinationType: Camera.DestinationType.DATA_URL });
+			//{ quality: 60, destinationType: Camera.DestinationType.DATA_URL });
 		});
+		
+		// 
+		
+		
+		
 	});
 });

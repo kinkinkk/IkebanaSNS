@@ -158,14 +158,14 @@ function selectDatas()
 // テーブル追加
 $('#ins_table').click(function()
 {
-	tranQeury('INSERT INTO $TB VALUES (?, ?, ?)', "TOOLS", [1, $('#target_text').val(), null] );
+	tranQeury('INSERT INTO $TB VALUES (?, ?, ?)', 'TOOLS', [1, $('#target_text').val(), null] );
 });
 
 
 // テーブル削除
 $('#del_table').click(function()
 {
-	tranQeury('DELETE FROM $TB WHERE ID = ?', "TOOLS", [$('#target_text').val()] );
+	tranQeury('DELETE FROM $TB WHERE ID = ?', 'TOOLS', [$('#target_text').val()] );
 });
 
 // エンターキーを押したときの挙動
