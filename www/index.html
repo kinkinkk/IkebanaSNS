@@ -21,7 +21,7 @@ $(document).ready(function()
 {
 	var nowShowMenu = '#content_home';
 	
-	$('a[data-iconpos=\'top\']').live('click', function()
+	$('a[data-iconpos=\'top\']').click(function()
 	{
 		$(nowShowMenu).hide();
 
@@ -31,21 +31,31 @@ $(document).ready(function()
 		return;
 	});
 	
-	$('#lnk_home').click();
+	
+	$('img[name=\'cap_images\']').click(function()
+	{
+		$('img[name=\'cap_images\']').parent().removeClass('selected_image');
+		$(this).parent().addClass('selected_image');
+	});
+
+
+	$('#cap_image1, #lnk_home').click();
+
+	
 });
 -->
 </script>
 </head>
 <body>
-
+<div data-role='page'>
 <!-- 通知 -->
 <div id='notification'>
 </div>
 <!-- コンテンツ -->
 
 <!-- ホーム -->
-<div id='content_home' style='display:none;'>
-<table border='1'> 
+<div class='contents' id='content_home'>
+<table class='list' border='1'> 
 <tr height='60px'><td width='25%'></td><td width='25%'></td><td width='25%'></td><td width='25%'></td></tr>
 <tr height='60px'><td width='25%'></td><td width='25%'></td><td width='25%'></td><td width='25%'></td></tr>
 <tr height='60px'><td width='25%'></td><td width='25%'></td><td width='25%'></td><td width='25%'></td></tr>
@@ -57,14 +67,14 @@ $(document).ready(function()
 </div>
 
 <!-- 登録 -->
-<div id='content_entry' style='display:none;'>
+<div class='contents' id='content_entry'>
 <table>
 <tr><td>
 <table>
 <tr>
-<td align='right'><img id='image1' src='' border='1' style='height: 90px; width: 90px;' /></td>
-<td align='center'><img id='image2' src='' border='1' style='height: 90px; width: 90px;' /></td>
-<td align='left'><img id='image3' src='' border='1' style='height: 90px; width: 90px;' /></td>
+<td align='right'><span id='cap_image2'><img name='cap_images' class='capture_images' src='' border='1' /></span></td>
+<td align='center'><span id='cap_image1'><img name='cap_images' class='capture_images' src='' border='1' /></span></td>
+<td align='left'><span id='cap_image3'><img name='cap_images' class='capture_images' src='' border='1' /></span></td>
 </tr>
 <tr><td align='center' colspan='3'><a href='#' id='camera' data-theme='b' data-icon='arrow-u' data-role='button'>撮 影</a></td></tr>
 </table>
@@ -109,21 +119,39 @@ $(document).ready(function()
 花器
 <input type='text' value='' maxlength='100' />
 </td></tr>
+<tr><td align='left'>
+\<input type='text' value='' maxlength='100' />
+</td></tr>
+<tr><td align='left'>
+\<input type='text' value='' maxlength='100' />
+</td></tr>
+<tr><td align='left'>
+\<input type='text' value='' maxlength='100' />
+</td></tr>
+<tr><td align='left'>
+\<input type='text' value='' maxlength='100' />
+</td></tr>
+<tr><td align='left'>
+\<input type='text' value='' maxlength='100' />
+</td></tr>
+<tr><td align='left'>
+\<input type='text' value='' maxlength='100' />
+</td></tr>
 
 </table>
 </div>
 
 <!-- お気に入り -->
-<div id='content_favorit' style='display:none;'>favorit</div>
+<div class='contents' id='content_favorit'>favorit</div>
 
 <!-- 検索 -->
-<div id='content_search' style='display:none;'>search</div>
+<div class='contents' id='content_search'>search</div>
 
 
 <!-- メニュー -->
-<footer data-role='footer' data-theme='b' data-position='fixed' data-id='navi'>
+<footer data-role='footer' data-theme='b' data-position='fixed' data-tap-toggle='false' data-id='navi' style='display: block;' id='menu'>
 <div data-role='navbar'>
-<ul id='menus'>
+<ul>
 <li><a href='#' id='lnk_home' data-icon='home' data-iconpos='top'>ホーム</a></li>
 <li><a href='#' id='lnk_entry' data-icon='plus' data-iconpos='top'>撮影登録</a></li>
 <li><a href='#' id='lnk_favorit' data-icon='star' data-iconpos='top'>お気に入り</a></li>
@@ -131,6 +159,6 @@ $(document).ready(function()
 </ul>
 </div>
 </footer>
-
+</div>
 </body>
 </html>

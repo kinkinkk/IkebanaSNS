@@ -14,7 +14,10 @@ $(document).ready(function()
 			// カメラ起動
 			navigator.camera.getPicture(function(data)
 			{
-				$('#image1').attr('src', 'data:image/jpeg;base64,' + data);
+				$('.selected_image > img')
+					.attr('src', 'data:image/jpeg;base64,' + data)
+					.attr('border', '0')
+					.addClass('.captured_image');
 			}, 
 			// 失敗時
 			function (err_message) {
@@ -28,9 +31,17 @@ $(document).ready(function()
 			//{ quality: 60, destinationType: Camera.DestinationType.DATA_URL });
 		});
 		
-		// 
-		
-		
 		
 	});
+	
+	// TEST CODE
+	/*
+	$('#camera').click(function()
+	{
+		$('.selected_image > img')
+			.attr('src', '/Users/kanazawa/Documents/cat.jpg')
+			.attr('border', '0')
+			.addClass('captured_image');
+	});
+	*/
 });
