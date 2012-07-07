@@ -26,8 +26,23 @@ $(document).ready(function()
 		$('#content_home, #content_entry, #content_favorit, #content_search').hide();
 
 		$('#' + $(this).attr('id').replace('lnk', 'content')).show();
+		return;
+	});
+	
+    // タッチイベント,ジェスチャーイベントの取得
+	$(document).bind('touchmove', function (event)
+	{
+        var touch = event.originalEvent.touches[0];
+
+		// div要素だけは、タップイベントに反応したいので、抑止しない。
+		if (touch.target.tagName.toLowerCase() == 'div') { return; }
+
+        // preventDefaultでブラウザ標準動作を抑止する。
+        event.preventDefault();
+		
 		
 	});
+	
 	
 });
 -->
