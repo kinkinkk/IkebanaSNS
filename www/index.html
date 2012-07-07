@@ -59,19 +59,24 @@ $(document).ready(function()
 <!-- 登録 -->
 <div id='content_entry' style='display:none;'>
 <table>
-<tr><td width='130'>
-<table>
-<tr><td rowspan='2'><img id='image1' src='' border='1' style='height: 90px; width: 90px;' /></td>
-<td valign='top'><img id='image2' src='' border='1' style='height: 30px; width: 30px;' /></td></tr>
-<tr><td valign='bottom'><img id='image3' src='' border='1' style='height: 30px; width: 30px;' /></td></tr>
-<tr><td align='center' colspan='2'><a href='#' id='camera' data-theme='b' data-icon='arrow-u' data-role='button'>撮 影</a></td></tr>
-</table>
-</td>
-<td align='left'>
-<table>
 <tr><td>
+<table>
+<tr>
+<td align='right'><img id='image1' src='' border='1' style='height: 90px; width: 90px;' /></td>
+<td align='center'><img id='image2' src='' border='1' style='height: 90px; width: 90px;' /></td>
+<td align='left'><img id='image3' src='' border='1' style='height: 90px; width: 90px;' /></td>
+</tr>
+<tr><td align='center' colspan='3'><a href='#' id='camera' data-theme='b' data-icon='arrow-u' data-role='button'>撮 影</a></td></tr>
+</table>
+</td></tr>
+<tr>
+<td align='left'>
+題名
+<span style='align: center;'><input type='text' value='' maxlength='100' data-inline='true' /></span>
+</td></tr>
+<tr><td align='left'>
 日付
-<fieldset data-role='controlgroup'>
+<fieldset data-role='controlgroup' data-type='horizontal'>
 <select name='select-choice-month' id='select-choice-month' data-theme='b' >
 	<option>月</option>
 	<option value='1'>1月</option><option value='2'>2月</option><option value='3'>3月</option><option value='4'>4月</option>
@@ -90,22 +95,17 @@ $(document).ready(function()
 	<option value='29'>29日</option><option value='30'>30日</option><option value='31'>31日</option>
 </select>
 </fieldset>
+
 </td></tr>
-<tr><td>
-題名
-<span style='align: center;'><input type='text' value='' maxlength='100' data-inline='true' /></span>
-</td></tr>
-</table>
-</td></tr>
-<tr><td colspan='2'>
+<tr><td align='left'>
 場所
 <span></span>
 </td></tr>
-<tr><td colspan='2'>
+<tr><td align='left'>
 流派
 <input type='text' value='' maxlength='100' />
 </td></tr>
-<tr><td colspan='2'>
+<tr><td align='left'>
 花器
 <input type='text' value='' maxlength='100' />
 </td></tr>
