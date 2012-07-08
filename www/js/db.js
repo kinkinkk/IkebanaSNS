@@ -1,12 +1,38 @@
+function getNowDateTime()
+{
+	var d 		= new Date();
+	
+	// 年月日・時分秒の取得
+	var year 	= d.getFullYear();
+	var month 	= d.getMonth() + 1;
+	var day 	= d.getDate();
+	var hour 	= d.getHours();
+	var minute 	= d.getMinutes();
+	var second 	= d.getSeconds();
+
+	// 1桁を2桁に変換する
+	if (month < 10) 	{month 	= "0" + month;}
+	if (day < 10) 		{day 	= "0" + day;}
+	if (hour < 10) 		{hour 	= "0" + hour;}
+	if (minute < 10) 	{minute = "0" + minute;}
+	if (second < 10) 	{second = "0" + second;}
+
+	return year + '/' + month + '/' + day + ' ' + hour + ':' + minute + ':' + second;
+}
+
+
+
 // bodyのオンロード時
 $(document).ready(function() 
 {
+	
+	
 	// DBObject
 	var objDB = openDatabase("IkebanaLocalDB", "1.0", "IkebanaLocal用DB", 5000000);
 	// DB接続
 	if (objDB) 
 	{
-		// データベースの作成 
+		// データベースの作成
 		tranQeury("\
 			CREATE TABLE IF NOT EXISTS USERS\
 			(\
@@ -17,7 +43,7 @@ $(document).ready(function()
 				IMAGE BLOB,\
 				CREATE_DATE TEXT,\
 				UPDATE_DATE TEXT\
-			)", "", null);
+			)");
 		
 		tranQeury("\
 			CREATE TABLE IF NOT EXISTS AUTHOERS\
@@ -38,7 +64,7 @@ $(document).ready(function()
 				UPDATE_DATE TEXT DEFAULT 'null',\
 				FOREIGN KEY (USER_ID)\
 				REFERENCES USERS (ID)\
-			)", "", null);
+			)");
 		
 		tranQeury("\
 			CREATE TABLE IF NOT EXISTS COMMENTS\
@@ -46,14 +72,14 @@ $(document).ready(function()
 				ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\
 				SERVER_AUTHOER_ID INTEGER NOT NULL,\
 				CONTENT TEXT\
-			)", "", null);
+			)");
 
 		tranQeury("\
 			CREATE TABLE IF NOT EXISTS FAVORIT\
 			(\
 				ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\
 				SERVER_AUTHOER_ID INTEGER NOT NULL UNIQUE\
-			)", "", null);
+			)");
 		
 		tranQeury("\
 			CREATE TABLE IF NOT EXISTS FLOWERS\
@@ -63,7 +89,15 @@ $(document).ready(function()
 				NAME_KANA TEXT NOT NULL,\
 				SEASON_MONTH NUMERIC NOT NULL,\
 				IMAGE BLOB\
-			)", "", null);
+			)");
+		
+		tranQeury("\
+			CREATE TABLE IF NOT EXISTS ORGANS\
+			(\
+				ID INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,\
+				NAME TEXT NOT NULL,\
+				IMAGE BLOB\
+			)");
 		
 		tranQeury("\
 			CREATE TABLE IF NOT EXISTS TOOLS\
@@ -71,7 +105,7 @@ $(document).ready(function()
 				ID INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,\
 				NAME TEXT NOT NULL,\
 				IMAGE BLOB\
-			)", "", null);
+			)");
 		
 		tranQeury("\
 			CREATE TABLE IF NOT EXISTS USE_FLOWERS\
@@ -80,7 +114,16 @@ $(document).ready(function()
 				FLOWER_ID INTEGER NOT NULL,\
 				FOREIGN KEY (FLOWER_ID)\
 				REFERENCES FLOWERS (ID)\
-			)", "", null);
+			)");
+		
+		tranQeury("\
+			CREATE TABLE IF NOT EXISTS USE_ORGANS\
+			(\
+				ID INTEGER,\
+				ORGAN_ID INTEGER NOT NULL,\
+				FOREIGN KEY (ORGAN_ID)\
+				REFERENCES ORGANS (ID)\
+			)");
 		
 		tranQeury("\
 			CREATE TABLE IF NOT EXISTS USE_TOOLS\
@@ -89,26 +132,25 @@ $(document).ready(function()
 				TOOL_ID INTEGER NOT NULL,\
 				FOREIGN KEY (TOOL_ID)\
 				REFERENCES TOOLS (ID)\
-			)", "", null);
+			)");
+		
 	}
 	else
 	{
 		alert("データベースストレージが使えません。");
+		return;
 	}
 	
 	
 	// SQL実行
-	function tranQeury(sql, targetTable, sqlArg, endedMethod)
+	function tranQeury(sql, sqlArg, endedMethod)
 	{
-	
 		objDB.transaction(
 			// SQLを実行
 			function(tx)
 			{
-				sql = sql.replace(/\$TB/g, targetTable); 
 				tx.executeSql(sql, sqlArg, endedMethod);
 			}, 
-			
 			// 異常時
 			function (err)
 			{
@@ -120,62 +162,50 @@ $(document).ready(function()
 			{
 				if (endedMethod === undefined)
 				{
-					selectDatas();
 				}
 				//alert("成功しました。");
 			}
 		);
-		
-
 	}
-	//selectDatas();
-});
 
+	/* 以下テーブル操作関数 */
 
-// テーブル参照
-function selectDatas()
-{
-	/*
-	tranQeury('SELECT * FROM $TB', "TOOLS", [], function(tx, results)
+	// テーブル参照
+	function selectDatas(tableName)
 	{
-		$('#disp_table').empty();
-		
-		for (var i=0; i < results.rows.length; i++)
+		var rs = new Array();
+		tranQeury('SELECT * FROM ' + tableName, null, function(tx, results)
 		{
-			$('#disp_table').append(
-				"<tr>" + 
-					"<td>" + results.rows.item(i).ID 	+ "</td>" +
-					"<td>" + results.rows.item(i).NAME 	+ "</td>" +
-				"</tr>");
-		}
-		// select文によって返される行数
-		//alert(results.rows.length + "行が見つかりました。");
-		
-	});
-	*/
-}
+			rs = results.rows;
+			alert(rs.length + 'a');
+		});
+		alert(rs.length + 'b');
+		return rs;
+	}
 
-// テーブル追加
-$('#ins_table').click(function()
-{
-	tranQeury('INSERT INTO $TB VALUES (?, ?, ?)', 'TOOLS', [1, $('#target_text').val(), null] );
-});
-
-
-// テーブル削除
-$('#del_table').click(function()
-{
-	tranQeury('DELETE FROM $TB WHERE ID = ?', 'TOOLS', [$('#target_text').val()] );
-});
-
-// エンターキーを押したときの挙動
-$('#target_text').keypress(function (e) 
-{
-	if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) 
+	// テーブル追加
+	function insertDatas(tableName, params)
 	{
-		// 追加ボタンをクリック
-		$('#ins_table').click();
-		return false;
+		var values = new Array();
+		for (var i = 0; i < params.length; i++)
+		{
+			values.push('?');
+		}
+		tranQeury('INSERT INTO ' + tableName + ' VALUES (' + values.toString() + ')', params);
+	}
+	// テーブル削除
+	function deleteDatas(tableName, params)
+	{
+		var whereStr = params.toString().replace(/[^,]/g, '?');
+		whereStr = whereStr.replace(/[,]/g, ' AND ');
+		tranQeury('DELETE FROM ' + tableName + ' WHERE ' + whereStr , params);
+	}
+	
+	// 初期データの作成
+	var userRows = selectDatas('USERS');
+	if (userRows.length == 0)
+	{
+		insertDatas('USERS', [0, 'ななし', UUID, null, null, getNowDateTime(), null]);
 	}
 });
 

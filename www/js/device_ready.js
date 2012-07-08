@@ -1,14 +1,18 @@
 /* cordava系処理
  * ここに記載
  * */
+
+var UUID = 'none';
 // onload時
 $(document).ready(function() 
 {
 	// デバイスの準備ができたか
 	document.addEventListener('deviceready', function() 
 	{
-		
 		// デバイス準備OK
+		
+		// UUID取得
+		UUID = device.uuid;
 		
 		// カメラをクリック
 		$('#camera').click(function()
