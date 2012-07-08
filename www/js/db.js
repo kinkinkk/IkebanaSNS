@@ -171,16 +171,12 @@ $(document).ready(function()
 	/* 以下テーブル操作関数 */
 
 	// テーブル参照
-	function selectDatas(tableName)
+	function selectDatas(tableName, afterFn)
 	{
-		var rs = new Array();
 		tranQeury('SELECT * FROM ' + tableName, null, function(tx, results)
 		{
-			rs = results.rows;
-			alert(rs.length + 'a');
+			setInterval(afterFn(results.rows), 0);
 		});
-		alert(rs.length + 'b');
-		return rs;
 	}
 
 	// テーブル追加
@@ -202,10 +198,13 @@ $(document).ready(function()
 	}
 	
 	// 初期データの作成
-	var userRows = selectDatas('USERS');
-	if (userRows.length == 0)
+	selectDatas('USERS', function (rs)
 	{
-		insertDatas('USERS', [0, 'ななし', UUID, null, null, getNowDateTime(), null]);
-	}
+		if (rs.length == 0)
+		{
+			insertDatas('USERS', [0, 'ななし', UUID, null, null, getNowDateTime(), null]);
+		}
+		//else{alert (rs.item(0).AUTH_CODE);}
+	});
 });
 
