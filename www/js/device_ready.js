@@ -1,11 +1,13 @@
 /* cordava系処理
  * ここに記載
  * */
+// onload時
 $(document).ready(function() 
 {
 	// デバイスの準備ができたか
 	document.addEventListener('deviceready', function() 
 	{
+		
 		// デバイス準備OK
 		
 		// カメラをクリック
@@ -23,7 +25,7 @@ $(document).ready(function()
 			function (err_message) {
 				if (err_message != 'no image selected') 
 				{
-					alert('カメラで写真を撮るときに失敗しました。');
+					calert('カメラで写真を撮るときに失敗しました。', null, '撮影に失敗');
 				}
 			}, 
 			// クオリティ
@@ -31,6 +33,40 @@ $(document).ready(function()
 			//{ quality: 60, destinationType: Camera.DestinationType.DATA_URL });
 		});
 		
+		var isUseGeoTag = true;
+
+		navigator.geolocation.getCurrentPosition(function (position) {isUseGeoTag = true;}, function (error) {isUseGeoTag = false;});
+		
+		if (isUseGeoTag)
+		{
+			// 位置情報取得
+			$('#lnk_entry').click(function()
+			{
+				navigator.geolocation.getCurrentPosition(function(position)
+				{
+					// 緯度取得
+					var latitude = position.coords.latitude;
+					// 経度取得
+					var longitude = position.coords.longitude;
+					
+					var latlng = new google.maps.LatLng(latitude, longitude);
+					var map = 
+						new google.maps.Map(
+								$('#map_zone').get(0),
+								{ zoom: 16, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP } );
+								
+					// マップにマーカー追加
+					(new google.maps.Marker({ position: latlng })).setMap(map);
+
+				});
+			});
+		}
+		
+		// codava通知アラート
+		function calert(message, alertCallback, title, buttonName)
+		{
+			navigator.notification.alert(message, alertCallback, title, buttonName);
+		}
 		
 	});
 	
