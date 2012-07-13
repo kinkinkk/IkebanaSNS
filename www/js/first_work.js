@@ -11,7 +11,7 @@ $(document).ready(function()
 			var dialog_html = [
 			'<div data-role=\'page\' id=\'first_dialog\'>',
 			'<div data-role=\'content\'><p>あなたのお名前を記入してください</p>',
-			'<input type=\'text\' id=\'nickname\' value=\'\'>',
+			'<input type=\'text\' id=\'nickname\' value=\'\' maxlength=\'100\'>',
 			'<a href=\'#\' id=\'call\' data-role=\'button\' data-theme=\'b\'>決 定</a></div>',
 			'</div>'].join('');
 			
@@ -23,8 +23,7 @@ $(document).ready(function()
 			{
 				if ($('#nickname').val() != '')
 				{
-					
-					insertDatas('USERS', [0,$('#nickname').val(), UUID, null, null, getNowDateTime(), null]);
+					insertDatas('USERS', [0, $('#nickname').val(), UUID, null, null, getNowDateTime(), null]);
 					$('#first_dialog').dialog('close');
 				}
 				else
@@ -32,12 +31,10 @@ $(document).ready(function()
 					calert('お名前を入力してください。', null, 'お名前の入力');
 				}
 			});
-
-			
 		}
 		else
 		{
-			alert(rs.item(0).AUTH_CODE + ':' + rs.item(0).NICKNAME);
+			calert(rs.item(0).AUTH_CODE + ':' + rs.item(0).NICKNAME);
 		}
 	});
 });

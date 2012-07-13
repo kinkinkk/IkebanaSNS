@@ -142,7 +142,7 @@ function tranQeury(sql, sqlArg, endedMethod)
 		function (err)
 		{
 			console.log(err);
-			alert('エラーが発生しました。');
+			calert('エラーが発生しました。', null, 'エラー');
 		}, 
 		// 成功時
 		function ()
@@ -154,7 +154,6 @@ function tranQeury(sql, sqlArg, endedMethod)
 // テーブル参照
 function selectDatas(tableName, afterFn)
 {
-
 	tranQeury('SELECT * FROM ' + tableName, null, function(tx, results)
 	{
 		setInterval(afterFn(results.rows), 0);
