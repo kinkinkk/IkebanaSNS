@@ -26,17 +26,18 @@ $(document).ready(function()
 					.addClass('.captured_image');
 			}, 
 			// 失敗時
-			function (err_message) {
+			function (err_message) 
+			{
 				if (err_message != 'no image selected') 
 				{
 					calert('カメラで写真を撮るときに失敗しました。', null, '撮影に失敗');
 				}
-			}, 
+			},
 			// クオリティ
 			{ quality: 20, allowEdit: true ,destinationType: Camera.DestinationType.DATA_URL });
 			//{ quality: 60, destinationType: Camera.DestinationType.DATA_URL });
 		});
-		
+
 		var isUseGeoTag = true;
 
 		navigator.geolocation.getCurrentPosition(function (position) {isUseGeoTag = true;}, function (error) {isUseGeoTag = false;});
@@ -66,11 +67,6 @@ $(document).ready(function()
 			});
 		}
 		
-		// codava通知アラート
-		function calert(message, alertCallback, title, buttonName)
-		{
-			navigator.notification.alert(message, alertCallback, title, buttonName);
-		}
 		
 	});
 	
@@ -85,3 +81,16 @@ $(document).ready(function()
 	});
 	*/
 });
+
+// codava通知アラート
+function calert(message, alertCallback, title, buttonName)
+{
+	if (UUID != 'none')
+	{
+		navigator.notification.alert(message, alertCallback, title, buttonName);
+	}
+	else 
+	{
+		alert(message);
+	}
+}

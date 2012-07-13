@@ -13,6 +13,7 @@
 <script type='text/javascript' charset='utf-8' src='http://maps.google.com/maps/api/js?sensor=false'></script>
 <script type='text/javascript' charset='utf-8' src='js/device_ready.js'></script>
 <script type='text/javascript' charset='utf-8' src='js/db.js'></script>
+<script type='text/javascript' charset='utf-8' src='js/first_work.js'></script>
 <link rel='stylesheet' href='css/main.css' />
 
 <script>
@@ -40,8 +41,7 @@ $(document).ready(function()
 	});
 
 
-	$('#cap_image1, #lnk_home').click();
-//	$('#cap_image1, #lnk_entry').click();
+	$('#cap_img1, #lnk_home').click();
 });
 -->
 </script>
@@ -73,9 +73,9 @@ $(document).ready(function()
 <tr><td>
 <table>
 <tr>
-<td align='right'><span id='cap_image2'><img name='cap_images' class='capture_images' src='' border='1' /></span></td>
-<td align='center'><span id='cap_image1'><img name='cap_images' class='capture_images' src='' border='1' /></span></td>
-<td align='left'><span id='cap_image3'><img name='cap_images' class='capture_images' src='' border='1' /></span></td>
+<td align='right'><span id='cap_image2'><img name='cap_images' id='cap_img2' class='capture_images' src='' border='1' /></span></td>
+<td align='center'><span id='cap_image1'><img name='cap_images' id='cap_img1' class='capture_images' src='' border='1' /></span></td>
+<td align='left'><span id='cap_image3'><img name='cap_images' id='cap_img3' class='capture_images' src='' border='1' /></span></td>
 </tr>
 <tr><td align='center' colspan='3'><a href='#' id='camera' data-theme='b' data-icon='arrow-u' data-role='button'>撮 影</a></td></tr>
 </table>
