@@ -19,7 +19,7 @@ $(document).ready(function()
 			$('body').append($(dialog_html));
 			$.mobile.changePage('#first_dialog', {transition: 'pop', role: 'dialog'});
 
-			$('#call').live('click', function ()
+			$('#call').live('vclick', function ()
 			{
 				if ($('#nickname').val() != '')
 				{
@@ -34,7 +34,7 @@ $(document).ready(function()
 		}
 		else
 		{
-			calert(rs.item(0).AUTH_CODE + ':' + rs.item(0).NICKNAME);
+			//calert(rs.item(0).AUTH_CODE + ':' + rs.item(0).NICKNAME);
 		}
 	});
 });

@@ -23,7 +23,7 @@ $(document).ready(function()
 {
 	var nowShowMenu = '#content_home';
 	
-	$('a[data-iconpos=\'top\']').click(function()
+	$('a[data-iconpos=\'top\']').bind('vclick', function()
 	{
 		$(nowShowMenu).hide();
 
@@ -34,14 +34,25 @@ $(document).ready(function()
 	});
 	
 	
-	$('img[name=\'cap_images\']').click(function()
+	$('img[name=\'cap_images\']').bind('vclick', function()
 	{
 		$('img[name=\'cap_images\']').parent().removeClass('selected_image');
 		$(this).parent().addClass('selected_image');
 	});
 
-
+	setTimeout(function () 
+	{
+		$('div > input[type=\'text\'], div > textarea').map(function() 
+		{
+			$(this).attr('placeholder', $(this).parent().children('label').html() +'を入力してください。')
+		});
+	}, 0);
+	
+	
+	
+	
 	$('#cap_img1, #lnk_home').click();
+	
 });
 -->
 </script>
@@ -81,63 +92,80 @@ $(document).ready(function()
 </table>
 </td></tr>
 <tr><td align='left'>
-題名
-<input type='text' id='title' value='' maxlength='100' />
+<div data-role='fieldcontain'>
+	<label for='title'>題名</label>
+	<input type='text' id='title' value='' maxlength='100' />
+</div>
 </td></tr>
 <tr><td align='left'>
-日付
-<fieldset data-role='controlgroup' data-type='horizontal'>
-<select id='month' data-theme='b' >
-	<option>月</option>
-	<option value='1'>1月</option><option value='2'>2月</option><option value='3'>3月</option><option value='4'>4月</option>
-	<option value='5'>5月</option><option value='6'>6月</option><option value='7'>7月</option><option value='8'>8月</option>
-	<option value='9'>9月</option><option value='10'>10月</option><option value='11'>11月</option><option value='12'>12月</option>
-</select>
-<select id='day' data-theme='b' >
-	<option>日</option>
-	<option value='1'>1日</option><option value='2'>2日</option><option value='3'>3日</option><option value='4'>4日</option>
-	<option value='5'>5日</option><option value='6'>6日</option><option value='7'>7日</option><option value='8'>8日</option>
-	<option value='9'>9日</option><option value='10'>10日</option><option value='11'>11日</option><option value='12'>12日</option>
-	<option value='13'>13日</option><option value='14'>14日</option><option value='15'>15日</option><option value='16'>16日</option>
-	<option value='17'>17日</option><option value='18'>18日</option><option value='19'>19日</option><option value='20'>20日</option>
-	<option value='21'>21日</option><option value='22'>22日</option><option value='23'>23日</option><option value='24'>24日</option>
-	<option value='25'>25日</option><option value='26'>26日</option><option value='27'>27日</option><option value='28'>28日</option>
-	<option value='29'>29日</option><option value='30'>30日</option><option value='31'>31日</option>
-</select>
-</fieldset>
+<div data-role='fieldcontain'>
+	<label for='day'>日付</label>
+	<fieldset data-role='controlgroup' data-type='horizontal'>
+		<select id='month' data-theme='b' >
+			<option>月</option>
+			<option value='1'>1月</option><option value='2'>2月</option><option value='3'>3月</option><option value='4'>4月</option>
+			<option value='5'>5月</option><option value='6'>6月</option><option value='7'>7月</option><option value='8'>8月</option>
+			<option value='9'>9月</option><option value='10'>10月</option><option value='11'>11月</option><option value='12'>12月</option>
+		</select>
+		<select id='day' data-theme='b' >
+			<option>日</option>
+			<option value='1'>1日</option><option value='2'>2日</option><option value='3'>3日</option><option value='4'>4日</option>
+			<option value='5'>5日</option><option value='6'>6日</option><option value='7'>7日</option><option value='8'>8日</option>
+			<option value='9'>9日</option><option value='10'>10日</option><option value='11'>11日</option><option value='12'>12日</option>
+			<option value='13'>13日</option><option value='14'>14日</option><option value='15'>15日</option><option value='16'>16日</option>
+			<option value='17'>17日</option><option value='18'>18日</option><option value='19'>19日</option><option value='20'>20日</option>
+			<option value='21'>21日</option><option value='22'>22日</option><option value='23'>23日</option><option value='24'>24日</option>
+			<option value='25'>25日</option><option value='26'>26日</option><option value='27'>27日</option><option value='28'>28日</option>
+			<option value='29'>29日</option><option value='30'>30日</option><option value='31'>31日</option>
+		</select>
+	</fieldset>
+</div>
 </td></tr>
 <tr><td align='left'>
-場所
-<div id='map_zone' style='width: 200px; height: 200px;'></div>
+<div data-role='fieldcontain'>
+	<label for='map_zone'>場所</label>
+	<div id='map_zone' style='width: 150px; height: 150px;'></div>
+</div>
 </td></tr>
 <tr><td align='left'>
-流派
-<input type='text' id='school' value='' maxlength='100' />
+<div data-role='fieldcontain'>
+	<label for='school'>流派</label>
+	<input type='text' id='school' value='' maxlength='100' />
+</div>
 </td></tr>
 <tr><td align='left'>
-スタイル
-<input type='text' id='style' value='' maxlength='100' />
+<div data-role='fieldcontain'>
+	<label for='style'>スタイル</label>
+	<input type='text' id='style' value='' maxlength='100' />
+</div>
 </td></tr>
 <tr><td align='left'>
-花器
-<select id='organ' data-theme='b' data-inline='true'>
-	<option>選択</option>
-</select>
+<div data-role='fieldcontain'>
+	<label for='organ'>花器</label>
+	<select id='organ' data-theme='b' data-inline='true'>
+		<option>選択</option>
+	</select>
+</div>
 </td></tr>
 <tr><td align='left'>
-使用花
-<select id='flower' data-theme='b' data-inline='true'>
-	<option>選択</option>
-</select>
+<div data-role='fieldcontain'>
+	<label for='flower'>使用花</label>
+	<select id='flower' data-theme='b' data-inline='true'>
+		<option>選択</option>
+	</select>
+</div>
 </td></tr>
 <tr><td align='left'>
-アピールポイント
-<input type='text' id='appeal' value='' maxlength='100' />
+<div data-role='fieldcontain'>
+	<label for='appeal'>アピールポイント</label>
+	<input type='text' id='appeal' value='' maxlength='100' />
+</div>
 </td></tr>
 <tr><td align='left'>
-反省点
-<textarea id='check_point' maxlength='1000' >
-</textarea>
+<div data-role='fieldcontain'>
+	<label for='check_point'>反省点</label>
+	<textarea id='check_point' maxlength='1000'></textarea>
+</div>
 </td></tr>
 <tr><td align='center'>
 <a href='#' id='posting' data-theme='b' data-icon='check' data-role='button'>投 稿</a>
