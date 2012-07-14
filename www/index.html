@@ -80,15 +80,19 @@ $(document).ready(function()
 <!-- 登録 -->
 <div class='contents' id='content_entry'>
 <form action='.'>
-<table>
+<table style='width: 100%;'>
 <tr><td>
-<table>
+<table style='width: 99%;'>
 <tr>
-<td align='right'><span id='cap_image2'><img name='cap_images' id='cap_img2' class='capture_images' src='' border='1' /></span></td>
+<td align='center'><span id='cap_image2'><img name='cap_images' id='cap_img2' class='capture_images' src='' border='1' /></span></td>
 <td align='center'><span id='cap_image1'><img name='cap_images' id='cap_img1' class='capture_images' src='' border='1' /></span></td>
-<td align='left'><span id='cap_image3'><img name='cap_images' id='cap_img3' class='capture_images' src='' border='1' /></span></td>
+<td align='center'><span id='cap_image3'><img name='cap_images' id='cap_img3' class='capture_images' src='' border='1' /></span></td>
 </tr>
-<tr><td align='center' colspan='3'><a href='#' id='camera' data-theme='b' data-icon='arrow-u' data-role='button'>撮 影</a></td></tr>
+<tr>
+<td align='center'><a href='#' id='camera' data-theme='b' data-role='button'>撮 影</a></td>
+<td align='center'><a href='#' id='camera1' data-theme='b' data-role='button'>撮 影</a></td>
+<td align='center'><a href='#' id='camera3' data-theme='b' data-role='button'>撮 影</a></td>
+</tr>
 </table>
 </td></tr>
 <tr><td align='left'>
@@ -130,7 +134,7 @@ $(document).ready(function()
 <tr><td align='left'>
 <div data-role='fieldcontain'>
 	<label for='school'>流派</label>
-	<input type='text' id='school' value='' maxlength='100' />
+	<input type='text' id='school' value='' maxlength='100' data-inline='true'/>
 </div>
 </td></tr>
 <tr><td align='left'>
