@@ -15,12 +15,13 @@ $(document).ready(function()
 		UUID = device.uuid;
 		
 		// カメラをクリック
-		$('#camera').bind('vclick', function()
+		$('#camera1, #camera2, #camera3').bind('vclick', function()
 		{
+			var targetImage = $(this).attr('id').replace('camera', 'cap_image');
 			// カメラ起動
 			navigator.camera.getPicture(function(data)
 			{
-				$('.selected_image > img')
+				$('#' + targetImage)
 					.attr('src', 'data:image/jpeg;base64,' + data)
 					.attr('border', '0')
 					.addClass('.captured_image');
@@ -34,7 +35,7 @@ $(document).ready(function()
 				}
 			},
 			// クオリティ
-			{ quality: 20, allowEdit: true ,destinationType: Camera.DestinationType.DATA_URL });
+			{ quality: 40, allowEdit: true ,destinationType: Camera.DestinationType.DATA_URL });
 			//{ quality: 60, destinationType: Camera.DestinationType.DATA_URL });
 		});
 
@@ -45,28 +46,39 @@ $(document).ready(function()
 			
 			if (isUseGeoTag)
 			{
-				// 位置情報取得
-				$('#lnk_entry').bind('vclick', function()
-				{
-					setTimeout(function () 
+				$('#location_use').bind('change', function() {
+					if ($('#location_use :selected').val() == 'on')
 					{
-						navigator.geolocation.getCurrentPosition(function(position)
+						setTimeout(function () 
 						{
-							// 緯度取得
-							var latitude = position.coords.latitude;
-							// 経度取得
-							var longitude = position.coords.longitude;
-							
-							var latlng = new google.maps.LatLng(latitude, longitude);
-							var map = 
-								new google.maps.Map(
-										$('#map_zone').get(0),
-										{ zoom: 16, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP } );
-										
-							// マップにマーカー追加
-							(new google.maps.Marker({ position: latlng })).setMap(map);
-						});
-					}, 0);
+							navigator.geolocation.getCurrentPosition(function(position)
+							{
+								// 緯度取得
+								var latitude = position.coords.latitude;
+								// 経度取得
+								var longitude = position.coords.longitude;
+								
+								var latlng = new google.maps.LatLng(latitude, longitude);
+								var map = 
+									new google.maps.Map(
+											$('#map_zone').get(0),
+											{ 
+												zoom: 				16, 
+												center: 			latlng, 
+												disableDefaultUI: 	true, 
+												panControl: 		false, 
+												draggable: 			false,
+												mapTypeId: 			google.maps.MapTypeId.ROADMAP } );
+											
+								// マップにマーカー追加
+								(new google.maps.Marker({ position: latlng })).setMap(map);
+							});
+						}, 0);
+					}
+					else
+					{
+						$('#map_zone').html('');
+					}
 				});
 			}
 		}, 0);

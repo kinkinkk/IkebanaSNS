@@ -36,6 +36,11 @@ img.capture_images {
 	-moz-border-radius: 	15px;
 	-webkit-border-radius: 	15px;
 	border-radius: 			15px;
+	margin-bottom: 			-4px;
+}
+
+a.cameras {
+	margin-top: 			-4px;
 }
 
 img.captured_image {
@@ -57,10 +62,11 @@ img.captured_image {
 */
 }
 
+/*
 .selected_image {
 	position: 	relative;
 	display: 	inline-block;
-	overflow: 	hidden; /* 不要部分を消す */
+	overflow: 	hidden; 
 	padding: 	0px;
 }
 
@@ -69,7 +75,7 @@ img.captured_image {
 	z-index: 		1;
 	width: 			30px;
 	height: 		30px;
-	content: 		"";	/* 表示するテキスト */
+	content: 		"";	
 	text-align: 	center;
 	color: 			#fff;
 	font-family: 	'Arial';
@@ -85,3 +91,4 @@ img.captured_image {
 	-webkit-box-shadow: 	5px 4px 5px rgba(0,0,0,0.44), inset 0px 0px 8px rgba(0,0,0,0.5);
 	box-shadow: 			5px 4px 5px rgba(0,0,0,0.44), inset 0px 0px 8px rgba(0,0,0,0.5);
 }
+*/

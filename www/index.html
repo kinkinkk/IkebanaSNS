@@ -33,13 +33,6 @@ $(document).ready(function()
 		return;
 	});
 	
-	
-	$('img[name=\'cap_images\']').bind('vclick', function()
-	{
-		$('img[name=\'cap_images\']').parent().removeClass('selected_image');
-		$(this).parent().addClass('selected_image');
-	});
-
 	setTimeout(function () 
 	{
 		$('div > input[type=\'text\'], div > textarea').map(function() 
@@ -47,9 +40,6 @@ $(document).ready(function()
 			$(this).attr('placeholder', $(this).parent().children('label').html() +'を入力してください。')
 		});
 	}, 0);
-	
-	
-	
 	
 	$('#cap_img1, #lnk_home').click();
 	
@@ -84,14 +74,14 @@ $(document).ready(function()
 <tr><td>
 <table style='width: 99%;'>
 <tr>
-<td align='center'><span id='cap_image2'><img name='cap_images' id='cap_img2' class='capture_images' src='' border='1' /></span></td>
-<td align='center'><span id='cap_image1'><img name='cap_images' id='cap_img1' class='capture_images' src='' border='1' /></span></td>
-<td align='center'><span id='cap_image3'><img name='cap_images' id='cap_img3' class='capture_images' src='' border='1' /></span></td>
+<td align='center'><img id='cap_image2' class='capture_images' src='' border='1' /></td>
+<td align='center'><img id='cap_image1' class='capture_images' src='' border='1' /></td>
+<td align='center'><img id='cap_image3' class='capture_images' src='' border='1' /></td>
 </tr>
 <tr>
-<td align='center'><a href='#' id='camera' data-theme='b' data-role='button'>撮 影</a></td>
-<td align='center'><a href='#' id='camera1' data-theme='b' data-role='button'>撮 影</a></td>
-<td align='center'><a href='#' id='camera3' data-theme='b' data-role='button'>撮 影</a></td>
+<td align='center'><a href='#' id='camera2' data-theme='b' data-role='button' class='cameras'>撮 影</a></td>
+<td align='center'><a href='#' id='camera1' data-theme='b' data-role='button' class='cameras'>撮 影</a></td>
+<td align='center'><a href='#' id='camera3' data-theme='b' data-role='button' class='cameras'>撮 影</a></td>
 </tr>
 </table>
 </td></tr>
@@ -126,38 +116,56 @@ $(document).ready(function()
 </div>
 </td></tr>
 <tr><td align='left'>
+<table style='width: 99%;'>
+<tr>
+<td style='width: 50%;'>
 <div data-role='fieldcontain'>
-	<label for='map_zone'>場所</label>
-	<div id='map_zone' style='width: 150px; height: 150px;'></div>
+	<label for='location_use'>場所の登録</label>
+	<select name='slider' id='location_use' data-role='slider'>
+		<option value='off'>しない</option>
+		<option value='on'>する</option>
+	</select>
 </div>
+</td>
+<td style='width: 50%;'>
+<div id='map_zone' style='width: 150px; height: 80px;'></div>
+</td>
+</tr>
+</table>
 </td></tr>
 <tr><td align='left'>
 <div data-role='fieldcontain'>
 	<label for='school'>流派</label>
-	<input type='text' id='school' value='' maxlength='100' data-inline='true'/>
+	<input type='text' id='school' value='' maxlength='100' data-inline='true' />
 </div>
 </td></tr>
 <tr><td align='left'>
 <div data-role='fieldcontain'>
 	<label for='style'>スタイル</label>
-	<input type='text' id='style' value='' maxlength='100' />
+	<input type='text' id='style' value='' maxlength='100' data-inline='true' />
 </div>
 </td></tr>
 <tr><td align='left'>
+<table style='width: 99%;'>
+<tr>
+<td style='width: 50%;'>
 <div data-role='fieldcontain'>
 	<label for='organ'>花器</label>
 	<select id='organ' data-theme='b' data-inline='true'>
 		<option>選択</option>
 	</select>
 </div>
-</td></tr>
-<tr><td align='left'>
+</td>
+<td style='width: 50%;'>
 <div data-role='fieldcontain'>
 	<label for='flower'>使用花</label>
 	<select id='flower' data-theme='b' data-inline='true'>
 		<option>選択</option>
 	</select>
 </div>
+</td>
+</tr>
+</table>
 </td></tr>
 <tr><td align='left'>
 <div data-role='fieldcontain'>
@@ -172,7 +180,7 @@ $(document).ready(function()
 </div>
 </td></tr>
 <tr><td align='center'>
-<a href='#' id='posting' data-theme='b' data-icon='check' data-role='button'>投 稿</a>
+<a href='#' id='posting' data-theme='b' data-icon='check' data-role='button' data-iconpos='right'>投 稿</a>
 </td></tr>
 </table>
 
@@ -180,7 +188,7 @@ $(document).ready(function()
 </div>
 
 <!-- お気に入り -->
-<div class='contents' id='content_favorit'>favorit</div>
+<div class='contents' id='content_favorite'>favorite</div>
 
 <!-- 検索 -->
 <div class='contents' id='content_search'>search</div>
@@ -192,7 +200,7 @@ $(document).ready(function()
 <ul>
 <li><a href='#' id='lnk_home' data-icon='home' data-iconpos='top'>ホーム</a></li>
 <li><a href='#' id='lnk_entry' data-icon='plus' data-iconpos='top'>撮影登録</a></li>
-<li><a href='#' id='lnk_favorit' data-icon='star' data-iconpos='top'>お気に入り</a></li>
+<li><a href='#' id='lnk_favorite' data-icon='star' data-iconpos='top'>お気に入り</a></li>
 <li><a href='#' id='lnk_search' data-icon='search' data-iconpos='top'>検索</a></li>
 </ul>
 </div>
