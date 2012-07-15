@@ -21,7 +21,7 @@ tranQeury("\
 		ID INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,\
 		USER_ID INTEGER DEFAULT 1 NOT NULL,\
 		NAME TEXT NOT NULL,\
-		IMAGE BLOB,\
+		AUTHOER_IMAGES_ID INTEGER,\
 		LOCATE TEXT DEFAULT 'null',\
 		SCHOOL TEXT,\
 		STYLE TEXT,\
@@ -35,6 +35,14 @@ tranQeury("\
 		FOREIGN KEY (USER_ID)\
 		REFERENCES USERS (ID)\
 	)");
+
+tranQeury("\
+	CREATE TABLE IF NOT EXISTS AUTHOER_IMAGES\
+	(\
+		ID INTEGER NOT NULL,\
+		BRANCH_ID INTEGER NOT NULL,\
+		IMAGE NONE\
+	);");
 
 tranQeury("\
 	CREATE TABLE IF NOT EXISTS COMMENTS\
@@ -177,4 +185,17 @@ function deleteDatas(tableName, params)
 	var whereStr = params.toString().replace(/[^,]/g, '?');
 	whereStr = whereStr.replace(/[,]/g, ' AND ');
 	tranQeury('DELETE FROM ' + tableName + ' WHERE ' + whereStr , params);
+}
+
+function beginTran()
+{
+	tranQeury('BEGIN');
+}
+function commitTran()
+{
+	tranQeury('COMMIT');
+}
+function rollbackTran()
+{
+	tranQeury('ROLLBACK');
 }

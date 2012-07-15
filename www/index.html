@@ -41,6 +41,25 @@ $(document).ready(function()
 		});
 	}, 0);
 	
+	$('#posting').click(function ()
+	{
+		beginTran();
+		try
+		{
+			insertDatas('AUTHORES', []);
+			insertDatas('AUTHORE_IMAGES', []);
+			commitTran();
+		}
+		catch (e)
+		{
+			alert('投稿に失敗しました');
+			rollbackTran();
+			
+		}
+	});
+	
+	
+	
 	$('#cap_img1, #lnk_home').click();
 	
 });
