@@ -85,19 +85,19 @@ $(document).ready(function()
 					}
 					else
 					{
-						$('#map_zone').html('');
+						$('#map_zone').empty();
 						_locateInfo = '';
 					}
 				});
 			}
 		}, 0);
 	});
-	
-	// TEST CODE
 	/*
-	$('#camera').click(function()
+	// TEST CODE
+	$('#camera1, #camera2, #camera3').click(function()
 	{
-		$('.selected_image > img')
+		var targetImage = $(this).attr('id').replace('camera', 'cap_image');
+		$('#' + targetImage)
 			.attr('src', '/Users/kanazawa/Documents/cat.jpg')
 			.attr('border', '0')
 			.addClass('captured_image');

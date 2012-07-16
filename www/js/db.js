@@ -203,3 +203,8 @@ function _deleteDatas(tableName, params)
 	_tranQeury('DELETE FROM ' + tableName + ' WHERE ' + whereStr , params);
 }
 
+// 指定sql実行
+function _sqlExcute(sql, afterFn)
+{
+	_tranQeury(sql, null, afterFn);
+}

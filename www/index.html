@@ -67,10 +67,9 @@ $(document).ready(function()
 
 <!-- 登録 -->
 <div class='contents' id='content_entry'>
-<form action='.'>
-<table style='width: 100%;'>
+<table class='entry' style='width: 100%;'>
 <tr><td>
-<table style='width: 99%;'>
+<table class='entry' style='width: 100%;'>
 <tr>
 <td align='center'><img id='cap_image2' class='capture_images' src='' border='1' /></td>
 <td align='center'><img id='cap_image1' class='capture_images' src='' border='1' /></td>
@@ -94,7 +93,6 @@ $(document).ready(function()
 	<label for='day'>日付</label>
 	<fieldset data-role='controlgroup' data-type='horizontal'>
 		<select id='year' data-theme='b' data-mini='true'>
-			<option value='2011'>2011年</option><option value='2012'>2012年</option><option value='2013'>2013年</option>
 		</select>
 		<select id='month' data-theme='b' data-mini='true'>
 			<option value='01'>1月</option><option value='02'>2月</option><option value='03'>3月</option><option value='04'>4月</option>
@@ -115,9 +113,9 @@ $(document).ready(function()
 </div>
 </td></tr>
 <tr><td align='left'>
-<table style='width: 99%;'>
+<table class='entry'>
 <tr>
-<td style='width: 50%;'>
+<td>
 <div data-role='fieldcontain'>
 	<label for='location_use'>場所の登録</label>
 	<select name='slider' id='location_use' data-role='slider'>
@@ -126,7 +124,7 @@ $(document).ready(function()
 	</select>
 </div>
 </td>
-<td style='width: 50%;'>
+<td style='width: 150px; height: 80px;'>
 <div id='map_zone' style='width: 150px; height: 80px;'></div>
 </td>
 </tr>
@@ -154,7 +152,7 @@ $(document).ready(function()
 </div>
 </td></tr>
 <tr><td align='left'>
-<table style='width: 99%;'>
+<table class='entry'>
 <tr>
 <td style='width: 50%;'>
 <div data-role='fieldcontain'>
@@ -194,11 +192,17 @@ $(document).ready(function()
 </td></tr>
 </table>
 
-</form>
 </div>
 
 <!-- お気に入り -->
-<div class='contents' id='content_favorite'>favorite</div>
+<div class='contents' id='content_favorite'>
+<div id='other_user_datas'></div>
+<hr />
+<div id='my_datas'>
+<table id='my_data_table' class='list' border='1'>
+</table>
+</div>
+</div>
 
 <!-- 検索 -->
 <div class='contents' id='content_search'>search</div>

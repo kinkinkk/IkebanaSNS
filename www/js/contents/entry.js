@@ -5,16 +5,21 @@ $(document).ready(function()
 	function init()
 	{
 		_captureDatas 	= { cap_image1: null, cap_image2: null, cap_image3: null };
+		_locateInfo 	= '';
 		
-		$('#cap_image1, #cap_image2, #cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image');
+		$('#cap_image1, #cap_image2, #cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image').hide(0).show(0);
+
 		$('#title, #school, #style, #appeal, #check_point').val('');
+		$('#organ, #flowers, #tools').val('0');
+		$('#location_use').val('off').slider('refresh');
+		$('#map_zone').empty();
 		
 		$('#year').val(_getNowYear()).selectmenu('refresh');
 		$('#month').val(_getNowMonth()).selectmenu('refresh');
 		$('#day').val(_getNowDay()).selectmenu('refresh');
 		
 	}
-	init();
+
 	setTimeout(function () 
 	{
 		$('div > input[type=\'text\'], div > textarea').map(function() 
@@ -98,6 +103,8 @@ $(document).ready(function()
 						  null
 						 ]);
 				
+				// 通信
+				
 			},
 			function (err)
 			{
@@ -112,6 +119,32 @@ $(document).ready(function()
 			}
 		);
 	});
-			
 	
+	
+	// 年の設定
+	var nowYear = _getNowYear();
+	var nowMonth = _getNowMonth();
+	switch (nowMonth)
+	{
+		case '01' :
+			// １月の場合のみ前年を表示
+			$('#year')
+				.append('<option value=\'' + (nowYear - 1) 	+ '\'>' + (nowYear - 1) + '年</option>')
+				.append('<option value=\'' + nowYear 		+ '\'>' + nowYear 		+ '年</option>');
+			break;
+		case '12' :
+			// １2月の場合のみ次年を表示
+			$('#year')
+				.append('<option value=\'' + nowYear 		+ '\'>' + nowYear 		+ '年</option>')
+				.append('<option value=\'' + (nowYear + 1) 	+ '\'>' + (nowYear + 1) + '年</option>');
+			break;
+		default :
+			$('#year')
+				.append('<option value=\'' + nowYear 		+ '\'>' + nowYear 		+ '年</option>');
+			break;
+	}
+	
+	
+	
+	init();
 });
