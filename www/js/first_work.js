@@ -1,9 +1,11 @@
+var _userID = 1;
+
 // onload時
 $(document).ready(function()
 {
 	// 初期データの作成
 	// 初回時のみ
-	selectDatas('USERS', function (rs)
+	_selectDatas('USERS', function (rs)
 	{
 		if (rs.length == 0)
 		{
@@ -17,24 +19,24 @@ $(document).ready(function()
 			
 			// DOMに追加
 			$('body').append($(dialog_html));
-			$.mobile.changePage('#first_dialog', {transition: 'pop', role: 'dialog'});
+			$.mobile.changePage('#first_dialog', {transition: 'slidedown', role: 'dialog'});
 
 			$('#call').live('vclick', function ()
 			{
 				if ($('#nickname').val() != '')
 				{
-					insertDatas('USERS', [0, $('#nickname').val(), UUID, null, null, getNowDateTime(), null]);
+					_insertDatas('USERS', [_userID, $('#nickname').val(), _uuID, null, null, _getNowDateTime(), null], ['ID', 'NICKNAME', 'AUTH_CODE', 'BIRTHDAY', 'IMAGE', 'CREATE_DATE', 'UPDATE_DATE']);
 					$('#first_dialog').dialog('close');
 				}
 				else
 				{
-					calert('お名前を入力してください。', null, 'お名前の入力');
+					_calert('お名前を入力してください。', null, 'お名前の入力');
 				}
 			});
 		}
 		else
 		{
-			//calert(rs.item(0).AUTH_CODE + ':' + rs.item(0).NICKNAME);
+			//_calert(rs.item(0).AUTH_CODE + ':' + rs.item(0).NICKNAME);
 		}
 	});
 });

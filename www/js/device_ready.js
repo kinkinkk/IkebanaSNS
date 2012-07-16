@@ -2,7 +2,11 @@
  * ここに記載
  * */
 
-var UUID = 'none';
+var _uuID 			= 'none';
+var _locateInfo 	= null;
+var _captureDatas 	= null;
+
+
 // onload時
 $(document).ready(function() 
 {
@@ -12,7 +16,7 @@ $(document).ready(function()
 		// デバイス準備OK
 		
 		// UUID取得
-		UUID = device.uuid;
+		_uuID = device.uuid;
 		
 		// カメラをクリック
 		$('#camera1, #camera2, #camera3').bind('vclick', function()
@@ -25,13 +29,15 @@ $(document).ready(function()
 					.attr('src', 'data:image/jpeg;base64,' + data)
 					.attr('border', '0')
 					.addClass('.captured_image');
+				_captureDatas[targetImage] = data;
+
 			}, 
 			// 失敗時
 			function (err_message) 
 			{
 				if (err_message != 'no image selected') 
 				{
-					calert('カメラで写真を撮るときに失敗しました。', null, '撮影に失敗');
+					_calert('カメラで写真を撮るときに失敗しました。', null, '撮影に失敗');
 				}
 			},
 			// クオリティ
@@ -72,12 +78,15 @@ $(document).ready(function()
 											
 								// マップにマーカー追加
 								(new google.maps.Marker({ position: latlng })).setMap(map);
+								
+								_locateInfo = latlng;
 							});
 						}, 0);
 					}
 					else
 					{
 						$('#map_zone').html('');
+						_locateInfo = '';
 					}
 				});
 			}
@@ -97,9 +106,9 @@ $(document).ready(function()
 });
 
 // codava通知アラート
-function calert(message, alertCallback, title, buttonName)
+function _calert(message, alertCallback, title, buttonName)
 {
-	if (UUID != 'none')
+	if (_uuID != 'none')
 	{
 		navigator.notification.alert(message, alertCallback, title, buttonName);
 	}
