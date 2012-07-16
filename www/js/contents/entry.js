@@ -42,7 +42,7 @@ $(document).ready(function()
 				var isAuthoerImageIns = false;
 				for (var cd in _captureDatas)
 				{
-					//if (_captureDatas[cd] != null)
+					if (_captureDatas[cd] != null)
 					{
 						tx.executeSql('INSERT INTO AUTHOER_IMAGES VALUES (?,?,?)', [seqAuthoerImages, cd.replace('cap_image', ''), _captureDatas[cd]]);
 						isAuthoerImageIns = true;
