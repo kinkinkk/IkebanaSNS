@@ -98,7 +98,7 @@ $(document).ready(function()
 	{
 		var targetImage = $(this).attr('id').replace('camera', 'cap_image');
 		$('#' + targetImage)
-			.attr('src', '/Users/kanazawa/Documents/cat.jpg')
+			.attr('src', '/Users/kin/Documents/cat.jpg')
 			.attr('border', '0')
 			.addClass('captured_image');
 	});
