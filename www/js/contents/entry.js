@@ -145,6 +145,18 @@ $(document).ready(function()
 	}
 	
 	
-	
+		
+	// イメージ拡大表示
+	$('.capture_images').bind('vclick', function()
+	{
+		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
+		$('#vi_picture').attr('src', $(this).attr('src'));
+	});
+	$('#vi_exit').bind('vclick', function()
+	{
+		$('#vi_picture').attr('src', '');
+	});
+
+		
 	init();
 });

@@ -42,7 +42,7 @@ img.capture_images {
 	margin-bottom: 			-3px;
 }
 
-a.cameras {
+div.cameras {
 	margin-top: 			-3px;
 }
 
@@ -59,10 +59,6 @@ img.captured_image {
 	background-image: 		-webkit-linear-gradient(-41deg, rgb(255,184,191) 0%, rgb(255,60,102) 100%);
 	background-image: 		-ms-linear-gradient(-41deg, 	rgb(255,184,191) 0%, rgb(255,60,102) 100%);
 	background-image: 		linear-gradient(-41deg, 		rgb(255,184,191) 0%, rgb(255,60,102) 100%);
-/*	-moz-box-shadow: 		9px 9px 17px rgba(0,0,0,0.45);
-	-webkit-box-shadow: 	9px 9px 17px rgba(0,0,0,0.45);
-	box-shadow: 			9px 9px 17px rgba(0,0,0,0.45);
-*/
 }
 
 .frame {
@@ -82,35 +78,3 @@ img.captured_image {
 	background: 	#fff;
 	z-index: 		-1;
 }
-
-
-/*
-.selected_image {
-	position: 	relative;
-	display: 	inline-block;
-	overflow: 	hidden; 
-	padding: 	0px;
-}
-
-.selected_image:after {
-	position: 		absolute;
-	z-index: 		1;
-	width: 			30px;
-	height: 		30px;
-	content: 		"";	
-	text-align: 	center;
-	color: 			#fff;
-	font-family: 	'Arial';
-	font-weight: 	bold;
-	padding: 		0px 0px;
-	left: 			55px;
-	top: 			55px;
-	background-color: 		#FF2028;
-	-moz-border-radius: 	15px;
-	-webkit-border-radius: 	15px;
-	border-radius: 			15px;
-	-moz-box-shadow: 		5px 4px 5px rgba(0,0,0,0.44), inset 0px 0px 8px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 	5px 4px 5px rgba(0,0,0,0.44), inset 0px 0px 8px rgba(0,0,0,0.5);
-	box-shadow: 			5px 4px 5px rgba(0,0,0,0.44), inset 0px 0px 8px rgba(0,0,0,0.5);
-}
-*/

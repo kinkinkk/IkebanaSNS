@@ -19,10 +19,26 @@ $(document).ready(function()
 		// UUID取得
 		_uuID = device.uuid;
 		
-		// カメラをクリック
-		$('#camera1, #camera2, #camera3').bind('vclick', function()
+		// カメラをクリック　または　イメージをクリック
+		$('a[name=\'pictures\']').bind('vclick', function()
 		{
-			var targetImage = $(this).attr('id').replace('camera', 'cap_image');
+			var targetID 		= $(this).attr('id');
+
+			// クオリティ
+			var camera_param 	= { quality: 40, allowEdit: true, destinationType: Camera.DestinationType.DATA_URL };
+	
+			var targetImage = null;
+			if (0 <= targetID.indexOf('camera'))
+			{
+				targetImage 					= targetID.replace('camera', 'cap_image');
+				camera_param['sourceType'] 		= Camera.PictureSourceType.CAMERA;
+			}
+			else
+			{
+				targetImage 					= targetID.replace('pic_select', 'cap_image');
+				camera_param['sourceType'] 		= Camera.PictureSourceType.SAVEDPHOTOALBUM;
+			}
+
 			// カメラ起動
 			navigator.camera.getPicture(function(data)
 			{
@@ -31,7 +47,6 @@ $(document).ready(function()
 					.attr('border', '0')
 					.addClass('.captured_image');
 				_captureDatas[targetImage] = data;
-
 			}, 
 			// 失敗時
 			function (err_message) 
@@ -42,10 +57,9 @@ $(document).ready(function()
 				}
 			},
 			// クオリティ
-			{ quality: 40, allowEdit: true ,destinationType: Camera.DestinationType.DATA_URL });
-			//{ quality: 60, destinationType: Camera.DestinationType.DATA_URL });
+			camera_param);
 		});
-
+		
 		var isUseGeoTag = true;
 		setTimeout(function () 
 		{
