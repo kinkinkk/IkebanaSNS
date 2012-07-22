@@ -25,7 +25,10 @@ $(document).ready(function()
 			{
 				if ($('#nickname').val() != '')
 				{
-					_insertDatas('USERS', [_userID, $('#nickname').val(), _uuID, null, null, _getNowDateTime(), null], ['ID', 'NICKNAME', 'AUTH_CODE', 'BIRTHDAY', 'IMAGE', 'CREATE_DATE', 'UPDATE_DATE']);
+					_insertDatas(
+						'USERS', 
+						[_userID, $('#nickname').val(), _uuID, null, null, _getNowDateTime(), null], 
+						['ID', 'NICKNAME', 'AUTH_CODE', 'BIRTHDAY', 'IMAGE', 'CREATE_DATE', 'UPDATE_DATE']);
 					$('#first_dialog').dialog('close');
 				}
 				else

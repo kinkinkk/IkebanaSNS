@@ -10,11 +10,12 @@ var _captureDatas 	= null;
 // onload時
 $(document).ready(function() 
 {
+
 	// デバイスの準備ができたか
 	document.addEventListener('deviceready', function() 
 	{
 		// デバイス準備OK
-		
+
 		// UUID取得
 		_uuID = device.uuid;
 		
@@ -91,7 +92,7 @@ $(document).ready(function()
 				});
 			}
 		}, 0);
-	});
+	}, false);
 	/*
 	// TEST CODE
 	$('#camera1, #camera2, #camera3').click(function()

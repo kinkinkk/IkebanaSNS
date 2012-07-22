@@ -56,7 +56,7 @@ $(document).ready(function()
 							'<td>' + rs.item(i).CHECK_POINT 	+ '</td>' +
 							'<td>' + rs.item(i).CREATE_DATE 	+ '</td>' +
 							'<td>' + rs.item(i).UPDATE_DATE 	+ '</td>' +'</tr>');
-*/					
+*/	
 			}
 		});
 	});
