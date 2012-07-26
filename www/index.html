@@ -39,7 +39,6 @@ $(document).ready(function()
 		$(nowShowMenu).show();
 		return;
 	});
-	
 
 	$('#lnk_home').click();
 });
@@ -225,7 +224,8 @@ $(document).ready(function()
 </div>
 
 <!-- 検索 -->
-<div class='contents' id='content_search'>search</div>
+<div class='contents' id='content_search'>search
+</div>
 
 
 <!-- メニュー -->
@@ -242,19 +242,18 @@ $(document).ready(function()
 </div>
 
 <!-- その他小画面 -->
-<div data-role='page' id='view_image'>
+<div data-role='dialog' id='view_image'>
 	<div data-role='content' align='center'>
-		<img id='vi_picture' src='' style='width: 265px; height: 265px;' />
+		<img id='vi_picture' src='' style='width: 100%;' />
 		<a href='#' id='vi_exit' data-role='button' data-theme='b' data-rel='back'>戻 る</a>
 	</div>
 </div>
-<div data-role='page' id='first_dialog'>
+<div data-role='dialog' id='first_dialog'>
 	<div data-role='content'>
 		<label for='nickname'>ニックネーム</label>
 		<input type='text' id='nickname' value='' maxlength='100' />
 		<a href='#' id='call' data-role='button' data-theme='b'>決 定</a>
 	</div>
 </div>
-
 </body>
 </html>
