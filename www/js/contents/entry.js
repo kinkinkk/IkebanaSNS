@@ -150,11 +150,19 @@ $(document).ready(function()
 	$('.capture_images').bind('vclick', function()
 	{
 		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
-		$('#vi_picture').attr('src', $(this).attr('src'));
+		
+		var imgSrc = $(this).attr('src');
+		setTimeout(function () 
+		{
+			$('#vi_picture').attr('src', imgSrc);
+		}, 0);
 	});
 	$('#vi_exit').bind('vclick', function()
 	{
-		$('#vi_picture').attr('src', '');
+		setTimeout(function () 
+		{
+			$('#vi_picture').attr('src', '');
+		}, 0);
 	});
 
 		
