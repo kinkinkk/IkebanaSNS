@@ -151,6 +151,7 @@ $(document).ready(function()
 	{
 		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
 		
+		
 		var imgSrc = $(this).attr('src');
 		setTimeout(function () 
 		{

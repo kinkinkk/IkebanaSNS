@@ -196,7 +196,7 @@ code {
  *  all browsers */																							
 .apple-navbar-ui li:hover .ui-btn-text, .apple-navbar-ui li .ui-btn-active .ui-btn-text						
 															{-moz-border-radius: .6em; -webkit-border-radius: .6em; border-radius: .6em; background-color: transparent; background-color: rgba(255,255,255,0.14); 
-															  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#23FFFFFF,endColorstr=#23FFFFFF);zoom: 1; /* IE6–IE9 */
+															  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#23FFFFFF,endColorstr=#23FFFFFF);zoom: 1; /* IE6Ã±IE9 */
 															  }													  
 /* IE9 dummy-HACK */
 .apple-navbar-ui li:hover a:not([dummy]) .ui-btn-text, .apple-navbar-ui .ui-btn-active:not([dummy]) .ui-btn-text			
@@ -237,7 +237,7 @@ code {
 	-webkit-background-size: 150px 66px;
 	-moz-background-size: 150px 66px;
 	-ms-background-size: 150px 66px;
-}													
+}
 
 .comboSprite li a[data-icon="features"] span:only-child  	{ background-position:    0px -22px }
 .comboSprite li a[data-icon="brands"] span:only-child		{ background-position:  -60px -22px }
