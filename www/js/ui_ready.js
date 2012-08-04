@@ -15,7 +15,7 @@ $(document).bind('mobileinit', function()
 	// リンククリック時にAjaxする
 	$.mobile.ajaxEnabled 									= true;
 	// コントロールの装飾をしないためのセレクター
-	$.mobile.page.prototype.options.keepNative 				= '.data-role-none';
+	//$.mobile.page.prototype.options.keepNative 				= '.data-role-none';
 	// デフォルトのAjaxページ遷移のトランジション
 	$.mobile.defaultTransition 								= 'slide';
 });
@@ -30,11 +30,8 @@ $(document).bind('pageinit', function()
 	$('a[data-iconpos=\'top\']').bind('vclick', function()
 	{
 		$(nowShowMenu).hide().trigger('hideLayout');
-		$.mobile.showPageLoadingMsg();
-
 		nowShowMenu = '#' + $(this).attr('id').replace('lnk', 'content');
 		$(nowShowMenu).show().trigger('showLayout');
-		$.mobile.hidePageLoadingMsg();
 	});
 
 	$('#lnk_home').click();

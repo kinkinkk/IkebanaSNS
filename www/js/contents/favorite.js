@@ -1,11 +1,15 @@
-// pagebeforecreate時
-$(document).bind('pagebeforecreate' ,function()
+// pageinit時
+$(document).bind('pageinit' ,function()
 {
 	var thisContent = '#content_favorite';
 
 	// コンテンツ表示時
 	$(thisContent).bind('showLayout', function()
 	{
+		$.mobile.showPageLoadingMsg();
+		$('#sub_menu, #other_datas > ul, #my_datas > ul').empty();
+		
+		
 		$('#sub_menu').append('<div data-role=\'navbar\'><ul><li><a href=\'#\' id=\'sub_menu_other\'>みんな</a></li><li><a href=\'#\' id=\'sub_menu_my\'>自分</a></li></ul></div>');
 		$('#sub_menu > div').navbar();
 		
@@ -23,9 +27,48 @@ $(document).bind('pagebeforecreate' ,function()
 		
 		$('#my_datas').hide();
 		$('#sub_menu_my').click();
-		
-		
-	
+
+
+
+		// MYリストクリック
+		$('#my_datas > ul > li a').live('vclick', function ()
+		{
+			var authoer_id = $(this).attr('id').replace('my_datas-', '');
+			
+			_sqlExcute('\
+				SELECT \
+					AUTHOERS.*, \
+					AUTHOER_IMAGES.BRANCH_ID, \
+					AUTHOER_IMAGES.IMAGE \
+				FROM \
+					AUTHOERS \
+				LEFT JOIN \
+					AUTHOER_IMAGES \
+				ON \
+					AUTHOERS.AUTHOER_IMAGES_ID = AUTHOER_IMAGES.ID \
+				WHERE \
+					AUTHOERS.ID = ' + authoer_id + ' \
+				ORDER BY \
+					AUTHOERS.ID, \
+					AUTHOER_IMAGES.ID ',
+				function(tx, results)
+			{
+				var rs = results.rows;
+				alert(rs.length);
+			});
+			
+		});
+
+		// 左スワイプ
+		$('#my_datas > ul > li a').live('swipeleft', function ()
+		{
+			// 削除ボタン表示
+			// TODO
+		});
+
+
+
+
 		// 自分の分読み込み
 		_sqlExcute('\
 			SELECT \
@@ -44,28 +87,31 @@ $(document).bind('pagebeforecreate' ,function()
 				0 < AUTHOER_IMAGES_ID \
 			ORDER BY \
 				AUTHOERS.ID, \
-				AUTHOER_IMAGES.ID',
+				AUTHOER_IMAGES.ID\
+			LIMIT 30',
 			function(tx, results)
 		{
-			$.mobile.showPageLoadingMsg();
-		
+
 			var rs = results.rows;
 			
 			var imageTag 	= '';
+			var textTag 	= '';
 			for (var i = 0; i < rs.length; i++)
 			{
 				var item 	= rs.item(i);
-				var nextItem= 0;
 				
 				if (item.IMAGE != null)
 				{
 					imageTag = '<img src=\'data:image/jpeg;base64,' + item.IMAGE + '\' />'
 				}
-
-				$('#my_datas > ul').append('<li><a href=\'#\'>' + imageTag + item.TITLE + '</a></li>');
-				$('#my_datas > ul').listview('refresh');
 				
-				$.mobile.hidePageLoadingMsg();
+				textTag = 	'<h3>' + item.TITLE + '</h3>';
+				textTag += 	'<p>'  + item.SCHOOL + '</p>';
+				textTag += 	'<p class=\'ui-li-aside\'>'  + item.POSTING_DATE + '</p>';
+				
+
+				$('#my_datas > ul').append('<li><a href=\'#\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>');
+				
 				
 					/*$('#my_data_table').append(
 						'<tr style=\'height: 90px;\'>' + 
@@ -86,6 +132,8 @@ $(document).bind('pagebeforecreate' ,function()
 							'<td>' + rs.item(i).CREATE_DATE 	+ '</td>' +
 							'<td>' + rs.item(i).UPDATE_DATE 	+ '</td>' +'</tr>');*/
 			}
+			$('#my_datas > ul').listview('refresh');
+			$.mobile.hidePageLoadingMsg();
 		});
 	});
 	

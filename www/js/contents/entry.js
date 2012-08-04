@@ -1,5 +1,5 @@
-// bodyのオンロード時
-$(document).ready(function() 
+// pageinit時
+$(document).bind('pageinit', function()
 {
 	// 初期化
 	function init()
@@ -150,25 +150,11 @@ $(document).ready(function()
 	
 		
 	// イメージ拡大表示
-	$('.capture_images').bind('vclick', function()
+	$('.capture_images').bind('click', function()
 	{
 		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
-		
-		
-		var imgSrc = $(this).attr('src');
-		setTimeout(function () 
-		{
-			$('#vi_picture').attr('src', imgSrc);
-		}, 0);
-	});
-	$('#vi_exit').bind('vclick', function()
-	{
-		setTimeout(function () 
-		{
-			$('#vi_picture').attr('src', '');
-		}, 0);
-	});
 
-		
+		$('#vi_picture').attr('src', $(this).attr('src'));
+	});
 	init();
 });
