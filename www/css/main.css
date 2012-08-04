@@ -26,17 +26,9 @@ table.list {
 	width:					100%;
 }
 
-div#content_home div#content_entry div#content_favorit div#content_search {
-	overflow: 				scroll;		/* スクロール表示 */ 
-	width: 					100%;
-	height: 				100%;
-
-}
-
 div.contents {
 	display:				none;
-	margin:					2px;
-	padding:				5px;
+	overflow: 				scroll;		/* スクロール表示 */
 }
 
 img.capture_images {
@@ -49,6 +41,7 @@ img.capture_images {
 }
 
 div.cameras {
+	display: 				table;
 	margin-top: 			-3px;
 }
 
@@ -68,24 +61,13 @@ img.picture {
 	margin-bottom: 			-3px;
 }
 
-/*
-.frame {
-	display: 		inline-block;
-	position: 		relative;
+div.map_zone {
+	width: 					150px; 
+	height: 				80px;
+	-moz-border-radius: 	15px;
+	-webkit-border-radius: 	15px;
+	border-radius: 			15px;
+	margin-bottom: 			-3px;
 }
-.frame:after {
-	position: 		absolute;
-	display: 		block;
-	content: 		"";
-	top: 			0;
-	left: 			0;
-	width: 			100%;
-	height: 		100%;
-	box-shadow: 	0 4px 10px rgba(0, 0, 0, 0.3);
-	transform: 		rotate(3deg); 
-	background: 	#fff;
-	z-index: 		-1;
-}
-*/
 
 

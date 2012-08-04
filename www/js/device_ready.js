@@ -42,15 +42,18 @@ $(document).ready(function()
 			// カメラ起動
 			navigator.camera.getPicture(function(data)
 			{
+				$.mobile.showPageLoadingMsg();
 				$('#' + targetImage)
 					.attr('src', 'data:image/jpeg;base64,' + data)
 					.attr('border', '0')
 					.addClass('.captured_image');
 				_captureDatas[targetImage] = data;
+				$.mobile.hidePageLoadingMsg();
 			}, 
 			// 失敗時
-			function (err_message) 
+			function (err_message)
 			{
+				$.mobile.hidePageLoadingMsg();
 				if (err_message != 'no image selected') 
 				{
 					_calert('カメラで写真を撮るときに失敗しました。', null, '撮影に失敗');
@@ -93,7 +96,14 @@ $(document).ready(function()
 											
 								// マップにマーカー追加
 								(new google.maps.Marker({ position: latlng })).setMap(map);
+
+								google.maps.event.addListener(map, 'domready', function() {
+								alert(1);
+								});
 								
+
+								$('#map_zone').parent().parent().prev().attr('style', '-moz-border-radius: 15px;-webkit-border-radius: 15px; border-radius: 15px; margin-bottom: -3px;');
+
 								_locateInfo = latlng;
 							});
 						}, 0);
@@ -104,6 +114,10 @@ $(document).ready(function()
 						_locateInfo = '';
 					}
 				});
+			}
+			else
+			{
+				$('#location_use').slider('disable');
 			}
 		}, 0);
 	}, false);

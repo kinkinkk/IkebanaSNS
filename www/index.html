@@ -8,8 +8,8 @@
 <link rel='stylesheet' type='text/css' href='plugins/jqueries/jquery.mobile-1.1.1.min.css' />
 <link rel='stylesheet' type='text/css' href='plugins/jqueries/jquery.mobile.plugins/bartender/bartender.css' />
 <script type='text/javascript' charset='utf-8' src='plugins/cordova-2.0.0.js'></script>
+<script type='text/javascript' charset='utf-8' src='js/ui_ready.js'></script>
 <script type='text/javascript' charset='utf-8' src='plugins/jqueries/jquery.mobile-1.1.1.min.js'></script>
-<script type='text/javascript' charset='utf-8' src='plugins/jqueries/jquery.mobile.jp.js'></script>
 
 <script type='text/javascript' charset='utf-8' src='http://maps.google.com/maps/api/js?sensor=false '></script>
 <script type='text/javascript' charset='utf-8' src='js/util.js'></script>
@@ -22,31 +22,12 @@
 <script type='text/javascript' charset='utf-8' src='js/contents/search.js'></script>
 
 <link rel='stylesheet' href='css/main.css' />
-
-<script>
-<!--
-// bodyのオンロード時
-$(document).ready(function() 
-{
-	var nowShowMenu = '#content_home';
-	
-	$('a[data-iconpos=\'top\']').bind('vclick', function()
-	{
-		$(nowShowMenu).hide();
-
-		nowShowMenu = '#' + $(this).attr('id').replace('lnk', 'content');
-		$(nowShowMenu).show();
-	});
-
-	$('#lnk_home').click();
-	
-
-});
--->
-</script>
 </head>
 <body>
 <div data-role='page' style='background: #FFFFFF;' data-fullscreen='false'>
+<!-- ヘッダ -->
+	<div data-role='header' data-position='fixed' data-tap-toggle='false' id='sub_menu'></div>
+
 <!-- コンテンツ -->
 
 <!-- ホーム -->
@@ -76,20 +57,20 @@ $(document).ready(function()
 						<tr>
 							<td align='center'>
 								<div data-role='controlgroup' data-type='horizontal' class='cameras'>
-									<a href='#' name='pictures' id='camera1' data-theme='b' data-role='button' data-mini='true'>撮影</a>
-									<a href='#' name='pictures' id='pic_select1' data-theme='b' data-role='button' data-mini='true'>選択</a>
+									<a href='#' name='pictures' id='camera1' data-theme='b' data-role='button' data-mini='true'>撮</a>
+									<a href='#' name='pictures' id='pic_select1' data-theme='b' data-role='button' data-mini='true'>選</a>
 								</div>
 							</td>
 							<td align='center'>
 								<div data-role='controlgroup' data-type='horizontal' class='cameras'>
-									<a href='#' name='pictures' id='camera2' data-theme='b' data-role='button' data-mini='true'>撮影</a>
-									<a href='#' name='pictures' id='pic_select2' data-theme='b' data-role='button' data-mini='true'>選択</a>
+									<a href='#' name='pictures' id='camera2' data-theme='b' data-role='button' data-mini='true'>撮</a>
+									<a href='#' name='pictures' id='pic_select2' data-theme='b' data-role='button' data-mini='true'>選</a>
 								</div>
 							</td>
 							<td align='center'>
 								<div data-role='controlgroup' data-type='horizontal' class='cameras'>
-									<a href='#' name='pictures' id='camera3' data-theme='b' data-role='button' data-mini='true'>撮影</a>
-									<a href='#' name='pictures' id='pic_select3' data-theme='b' data-role='button' data-mini='true'>選択</a>
+									<a href='#' name='pictures' id='camera3' data-theme='b' data-role='button' data-mini='true'>撮</a>
+									<a href='#' name='pictures' id='pic_select3' data-theme='b' data-role='button' data-mini='true'>選</a>
 								</div>
 							</td>
 						</tr>
@@ -136,14 +117,14 @@ $(document).ready(function()
 							<td>
 								<div data-role='fieldcontain'>
 									<label for='location_use'>場所の登録</label>
-									<select name='slider' id='location_use' data-role='slider'>
+									<select name='slider' id='location_use' data-role='slider' data-mini='true'>
 										<option value='off'>しない</option>
 										<option value='on'>する</option>
 									</select>
 								</div>
 							</td>
 							<td style='width: 150px; height: 80px;'>
-								<div id='map_zone' style='width: 150px; height: 80px;'></div>
+								<div><div id='map_zone' class='map_zone'></div></div>
 							</td>
 						</tr>
 					</table>
@@ -169,7 +150,7 @@ $(document).ready(function()
 				<td align='left'>
 					<div data-role='fieldcontain'>
 						<label for='organ'>花器</label>
-						<select id='organ' data-theme='b' data-inline='true'>
+						<select id='organ' data-theme='b' data-inline='true' data-mini='true'>
 							<option value='0'>選択</option>
 							<option value='999'>テスト</option>
 						</select>
@@ -183,7 +164,7 @@ $(document).ready(function()
 							<td style='width: 50%;'>
 								<div data-role='fieldcontain'>
 									<label for='flowers'>花材</label>
-									<select id='flowers' data-theme='b' data-inline='true'>
+									<select id='flowers' data-theme='b' data-inline='true' data-mini='true'>
 										<option value='0'>選択</option>
 										<option value='999'>テスト</option>
 									</select>
@@ -192,7 +173,7 @@ $(document).ready(function()
 							<td style='width: 50%;'>
 								<div data-role='fieldcontain'>
 									<label for='tools'>道具</label>
-									<select id='tools' data-theme='b' data-inline='true'>
+									<select id='tools' data-theme='b' data-inline='true' data-mini='true'>
 										<option value='0'>選択</option>
 										<option value='999'>テスト</option>
 									</select>
@@ -223,7 +204,7 @@ $(document).ready(function()
 			</tr>
 			<tr>
 				<td align='center'>
-					<a href='#' id='posting' data-theme='b' data-icon='check' data-role='button' data-iconpos='right'>投 稿</a>
+					<a href='#' id='posting' data-theme='b' data-icon='check' data-role='button' data-iconpos='right' data-mini='true'>投 稿</a>
 				</td>
 			</tr>
 		</table>
@@ -231,15 +212,13 @@ $(document).ready(function()
 
 <!-- お気に入り -->
 	<div class='contents' data-role='content' id='content_favorite'>
-		<div id='other_user_datas'></div>
-		<hr />
-		<div id='my_datas'>
-			<table id='my_data_table' border='1'></table>
-		</div>
+		<div id='other_datas'><ul data-role='listview'><li>a</li><li>b</li></ul></div>
+		<div id='my_datas'><ul data-role='listview' data-filter='true'></ul></div>
 	</div>
 
 <!-- 検索 -->
 	<div class='contents' data-role='content' id='content_search'>search
+		<input type='search' id='search' /><br />
 	</div>
 
 

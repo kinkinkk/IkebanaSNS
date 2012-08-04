@@ -1,16 +1,57 @@
-// bodyのオンロード時
-$(document).ready(function() 
+// pagebeforecreate時
+$(document).bind('pagebeforecreate' ,function()
 {
-	$('#lnk_favorite').bind('vclick', function () 
+	var thisContent = '#content_favorite';
+
+	// コンテンツ表示時
+	$(thisContent).bind('showLayout', function()
 	{
-		_sqlExcute('SELECT AUTHOERS.*, AUTHOER_IMAGES.BRANCH_ID , AUTHOER_IMAGES.IMAGE FROM AUTHOERS LEFT JOIN AUTHOER_IMAGES ON AUTHOERS.AUTHOER_IMAGES_ID = AUTHOER_IMAGES.ID WHERE 0 < AUTHOER_IMAGES_ID ORDER BY AUTHOERS.ID, AUTHOER_IMAGES.ID ', function(tx, results) 
+		$('#sub_menu').append('<div data-role=\'navbar\'><ul><li><a href=\'#\' id=\'sub_menu_other\'>みんな</a></li><li><a href=\'#\' id=\'sub_menu_my\'>自分</a></li></ul></div>');
+		$('#sub_menu > div').navbar();
+		
+		$('#sub_menu_other').live('vclick', function ()
 		{
+			$('#my_datas').hide();
+			$('#other_datas').show();
+		});
+	
+		$('#sub_menu_my').live('vclick', function ()
+		{
+			$('#my_datas').show();
+			$('#other_datas').hide();
+		});
+		
+		$('#my_datas').hide();
+		$('#sub_menu_my').click();
+		
+		
+	
+		// 自分の分読み込み
+		_sqlExcute('\
+			SELECT \
+				AUTHOERS.*, \
+				AUTHOER_IMAGES.BRANCH_ID, \
+				AUTHOER_IMAGES.IMAGE \
+			FROM \
+				AUTHOERS \
+			LEFT JOIN \
+				AUTHOER_IMAGES \
+			ON \
+				AUTHOERS.AUTHOER_IMAGES_ID = AUTHOER_IMAGES.ID \
+			AND \
+				BRANCH_ID = 1 \
+			WHERE \
+				0 < AUTHOER_IMAGES_ID \
+			ORDER BY \
+				AUTHOERS.ID, \
+				AUTHOER_IMAGES.ID',
+			function(tx, results)
+		{
+			$.mobile.showPageLoadingMsg();
+		
 			var rs = results.rows;
 			
-			$('#my_data_table').empty();
-			
 			var imageTag 	= '';
-			var imgCount 	= 0;
 			for (var i = 0; i < rs.length; i++)
 			{
 				var item 	= rs.item(i);
@@ -18,27 +59,15 @@ $(document).ready(function()
 				
 				if (item.IMAGE != null)
 				{
-					imageTag += '<img class=\'capture_images captured_image\' src=\'data:image/jpeg;base64,' + item.IMAGE + '\' style=\'position: absolute; top: 0; z-index: ' + (2 - imgCount) + '; left: ' + (10 * imgCount) + 'px;\' />';
-					imgCount++;
+					imageTag = '<img src=\'data:image/jpeg;base64,' + item.IMAGE + '\' />'
 				}
 
-				if ((i + 1) < rs.length)
-				{
-					nextItem = rs.item(i + 1);
-					if (nextItem.ID != item.ID)
-					{
-						createTrTd(item.TITLE, imageTag);
-						imageTag = '';
-						imgCount = 0;
-					}
-				}
-				else
-				{
-					createTrTd(item.TITLE, imageTag);
-				}
-					
-
-/*						$('#my_data_table').append(
+				$('#my_datas > ul').append('<li><a href=\'#\'>' + imageTag + item.TITLE + '</a></li>');
+				$('#my_datas > ul').listview('refresh');
+				
+				$.mobile.hidePageLoadingMsg();
+				
+					/*$('#my_data_table').append(
 						'<tr style=\'height: 90px;\'>' + 
 
 							'<td>' + item.ID 		+ '</td>' +
@@ -55,18 +84,15 @@ $(document).ready(function()
 							'<td>' + rs.item(i).APPEAL 	+ '</td>' +
 							'<td>' + rs.item(i).CHECK_POINT 	+ '</td>' +
 							'<td>' + rs.item(i).CREATE_DATE 	+ '</td>' +
-							'<td>' + rs.item(i).UPDATE_DATE 	+ '</td>' +'</tr>');
-*/	
+							'<td>' + rs.item(i).UPDATE_DATE 	+ '</td>' +'</tr>');*/
 			}
 		});
 	});
 	
-	function createTrTd(title, imageTag)
+	// コンテンツ非表示時
+	$(thisContent).bind('hideLayout', function()
 	{
-		$('#my_data_table').append(
-		'<tr valign=\'top\' style=\'height: 90px;\'>' + 
-			'<td width=\'60%\'>' + title + '</td>' + 
-			'<td><div style=\'position: relative;\'>' + imageTag + '</div></td>' +
-		'</tr>');
-	}	
+		$('#sub_menu, #other_datas > ul, #my_datas > ul').empty();
+	});
+
 });

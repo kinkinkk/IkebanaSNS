@@ -24,7 +24,10 @@ $(document).ready(function()
 	{
 		$('div > input[type=\'text\'], div > textarea').map(function() 
 		{
-			$(this).attr('placeholder', $(this).parent().children('label').html() +'を入力してください。')
+			if ($(this).parent().children('label').html() != null)
+			{
+				$(this).attr('placeholder', $(this).parent().children('label').html() +'を入力してください。');
+			}
 		});
 	}, 0);
 	
