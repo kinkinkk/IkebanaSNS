@@ -208,10 +208,10 @@ code {
  * IMPROVE: check to see if these are necessary 
  */  
 .apple-navbar-ui li a[data-icon="features"] .ui-btn-inner 		{ /* IE7 */ background-position-x:    0px; /* IE8+ */ -ms-background-position-x:    0px; }
-.apple-navbar-ui li a[data-icon="brands"] .ui-btn-inner 		{ /* IE7 */ background-position-x:  -60px; /* IE8+ */ -ms-background-position-x:  -60px; }
-.apple-navbar-ui li a[data-icon="fees"] .ui-btn-inner 			{ /* IE7 */ background-position-x:  -30px; /* IE8+ */ -ms-background-position-x:  -30px; }
-.apple-navbar-ui li a[data-icon="contact"] .ui-btn-inner 		{ /* IE7 */ background-position-x:  -90px; /* IE8+ */ -ms-background-position-x:  -90px; }
-.apple-navbar-ui li a[data-icon="about"] .ui-btn-inner			{ /* IE7 */ background-position-x: -120px; /* IE8+ */ -ms-background-position-x: -120px; }
+.apple-navbar-ui li a[data-icon="entry"] .ui-btn-inner 		{ /* IE7 */ background-position-x:  -60px; /* IE8+ */ -ms-background-position-x:  -60px; }
+.apple-navbar-ui li a[data-icon="list"] .ui-btn-inner 			{ /* IE7 */ background-position-x:  -30px; /* IE8+ */ -ms-background-position-x:  -30px; }
+.apple-navbar-ui li a[data-icon="search"] .ui-btn-inner 		{ /* IE7 */ background-position-x:  -90px; /* IE8+ */ -ms-background-position-x:  -90px; }
+.apple-navbar-ui li a[data-icon="favorite"] .ui-btn-inner			{ /* IE7 */ background-position-x: -120px; /* IE8+ */ -ms-background-position-x: -120px; }
 .apple-navbar-ui li a 	.ui-btn-inner							{ /* IE7 */ background-position-y:    0px; /* IE8+ */ -ms-background-position-y:    0px /* !important*/; }
  
  
@@ -240,10 +240,10 @@ code {
 }
 
 .comboSprite li a[data-icon="features"] span:only-child  	{ background-position:    0px -22px }
-.comboSprite li a[data-icon="brands"] span:only-child		{ background-position:  -60px -22px }
-.comboSprite li a[data-icon="fees"] span:only-child   		{ background-position:  -30px -22px }
-.comboSprite li a[data-icon="contact"] span:only-child		{ background-position:  -90px -22px }
-.comboSprite li a[data-icon="about"] span:only-child		{ background-position: -120px -22px }	
+.comboSprite li a[data-icon="entry"] span:only-child			{ background-position:  -60px -22px }
+.comboSprite li a[data-icon="list"] span:only-child   		{ background-position:  -30px -22px }
+.comboSprite li a[data-icon="search"] span:only-child		{ background-position:  -90px -22px }
+.comboSprite li a[data-icon="favorite"] span:only-child		{ background-position: -120px -22px }	
 
 /* ================ END SINGLE =============================== */
 
@@ -264,10 +264,10 @@ code {
 																  }
 																  
 .soloSprite li a[data-icon="features"] span:only-child  	{ background-position:    0px 0px }
-.soloSprite li a[data-icon="brands"] span:only-child		{ background-position:  -60px 0px }
-.soloSprite li a[data-icon="fees"] span:only-child   		{ background-position:  -30px 0px }
-.soloSprite li a[data-icon="contact"] span:only-child		{ background-position:  -90px 0px }
-.soloSprite li a[data-icon="about"] span:only-child		{ background-position: -120px 0px }	
+.soloSprite li a[data-icon="entry"] span:only-child		{ background-position:  -60px 0px }
+.soloSprite li a[data-icon="list"] span:only-child   		{ background-position:  -30px 0px }
+.soloSprite li a[data-icon="search"] span:only-child		{ background-position:  -90px 0px }
+.soloSprite li a[data-icon="favorite"] span:only-child		{ background-position: -120px 0px }
 
 
 .soloSprite .ui-icon::before							{ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorStr=#40ffffff,EndColorStr=#12ffffff);zoom: 1; 				 
@@ -296,10 +296,10 @@ code {
 																	  }																 
 																
 	.soloSprite li a[data-icon="features"] span:only-child  	{ background-position:    0px -22px }
-	.soloSprite li a[data-icon="brands"] span:only-child   		{ background-position:  -60px -22px }
-	.soloSprite li a[data-icon="fees"] span:only-child     		{ background-position:  -30px -22px }
-	.soloSprite li a[data-icon="contact"] span:only-child   	{ background-position:  -90px -22px }
-	.soloSprite li a[data-icon="about"] span:only-child    		{ background-position: -120px -22px }	  
+	.soloSprite li a[data-icon="entry"] span:only-child   		{ background-position:  -60px -22px }
+	.soloSprite li a[data-icon="list"] span:only-child     		{ background-position:  -30px -22px }
+	.soloSprite li a[data-icon="search"] span:only-child   	{ background-position:  -90px -22px }
+	.soloSprite li a[data-icon="favorite"] span:only-child    		{ background-position: -120px -22px }
 	}
 
 /* ============= END SEPARATE ========================== */
