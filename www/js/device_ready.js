@@ -121,17 +121,6 @@ $(document).ready(function()
 			}
 		}, 0);
 	}, false);
-	/*
-	// TEST CODE
-	$('#camera1, #camera2, #camera3').click(function()
-	{
-		var targetImage = $(this).attr('id').replace('camera', 'cap_image');
-		$('#' + targetImage)
-			.attr('src', '/Users/kin/Documents/cat.jpg')
-			.attr('border', '0')
-			.addClass('captured_image');
-	});
-	*/
 });
 
 // codava通知アラート

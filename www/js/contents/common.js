@@ -25,12 +25,11 @@ $(document).ready(function()
 	// イメージダイアログ表示
 	$('.capture_images').bind('click', function()
 	{
-		setTimeout(function ()
-		{
-			$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
+		if ($(this).attr('src') == '') { return; }
+	
+		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
 
-			$('#vi_picture').attr('src', $(this).attr('src'));
-		}, 0);
+		$('#vi_picture').attr('src', $(this).attr('src'));
 	});
 	// イメージダイアログ閉じるボタンを押下
 	$('#vi_exit').bind('click', function()

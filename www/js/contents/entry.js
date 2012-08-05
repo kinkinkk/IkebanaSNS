@@ -74,7 +74,8 @@ $(document).ready(function()
 				}
 			
 			
-				tx.executeSql('INSERT INTO AUTHOERS \
+				tx.executeSql(
+					'INSERT INTO AUTHOERS \
 						(\'USER_ID\',\
 						 \'TITLE\',\
 						 \'AUTHOER_IMAGES_ID\',\

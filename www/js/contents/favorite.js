@@ -2,13 +2,12 @@
 $(document).ready(function()
 {
 	var thisContent = '#content_favorite';
+	var stockHtml = '';
+
 
 	// コンテンツ表示時
 	$(thisContent).bind('showLayout', function()
 	{
-		$.mobile.showPageLoadingMsg();
-		$('#sub_menu, #other_datas > ul, #my_datas > ul').empty();
-		
 		
 		$('#sub_menu').append('<div data-role=\'navbar\'><ul><li><a href=\'#\' id=\'sub_menu_other\'>みんな</a></li><li><a href=\'#\' id=\'sub_menu_my\'>自分</a></li></ul></div>');
 		$('#sub_menu > div').navbar();
@@ -19,32 +18,30 @@ $(document).ready(function()
 
 
 
-
-
-
 		// 自分の分読み込み
 		_sqlExcute('\
 			SELECT \
 				AUTHOERS.*, \
-				AUTHOER_IMAGES.BRANCH_ID, \
-				AUTHOER_IMAGES.IMAGE \
+				MIN(AUTHOER_IMAGES.BRANCH_ID) AS BRANCH_ID, \
+				MIN(AUTHOER_IMAGES.IMAGE) AS IMAGE \
 			FROM \
 				AUTHOERS \
 			LEFT JOIN \
 				AUTHOER_IMAGES \
 			ON \
 				AUTHOERS.AUTHOER_IMAGES_ID = AUTHOER_IMAGES.ID \
-			AND \
-				BRANCH_ID = 1 \
 			WHERE \
 				0 < AUTHOER_IMAGES_ID \
+			GROUP BY \
+				AUTHOERS.ID \
 			ORDER BY \
 				AUTHOERS.POSTING_DATE DESC, \
 				AUTHOERS.ID, \
-				AUTHOER_IMAGES.ID\
+				AUTHOER_IMAGES.ID \
 			LIMIT 30',
 			function(tx, results)
 		{
+			$.mobile.showPageLoadingMsg();
 
 			var rs = results.rows;
 			
@@ -66,25 +63,6 @@ $(document).ready(function()
 
 				$('#my_datas > ul').append('<li><a href=\'#data_detail\' data-transition=\'slide\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>');
 				
-				
-					/*$('#my_data_table').append(
-						'<tr style=\'height: 90px;\'>' + 
-
-							'<td>' + item.ID 		+ '</td>' +
-							'<td>' + item.USER_ID 	+ '</td>' +
-							'<td>' + rs.item(i).AUTHOER_IMAGES_ID 	+ '</td>' +
-							'<td>' + rs.item(i).BRANCH_ID 	+ '</td>' +
-							'<td>' + rs.item(i).POSTING_DATE 	+ '</td>' +
-							'<td>' + rs.item(i).LOCATE 	+ '</td>' +
-							'<td>' + rs.item(i).SCHOOL 	+ '</td>' +
-							'<td>' + rs.item(i).STYLE 	+ '</td>' +
-							'<td>' + rs.item(i).ORGAN_ID 	+ '</td>' +
-							'<td>' + rs.item(i).USE_FLOWER_ID 	+ '</td>' +
-							'<td>' + rs.item(i).USE_TOOL_ID 	+ '</td>' +
-							'<td>' + rs.item(i).APPEAL 	+ '</td>' +
-							'<td>' + rs.item(i).CHECK_POINT 	+ '</td>' +
-							'<td>' + rs.item(i).CREATE_DATE 	+ '</td>' +
-							'<td>' + rs.item(i).UPDATE_DATE 	+ '</td>' +'</tr>');*/
 			}
 			
 			//$('#my_datas > ul > li a img').wrap($('<div class=\'nailthumb-container\'></div>'));
@@ -121,7 +99,11 @@ $(document).ready(function()
 	$('#my_datas > ul > li a').live('click', function ()
 	{
 		var authoer_id = $(this).attr('id').replace('my_datas-', '');
+
+		$('#dd_header > h1').empty();
 		
+		$('#dd_cap_image1, #dd_cap_image2, #dd_cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image');
+
 		_sqlExcute('\
 			SELECT \
 				AUTHOERS.*, \
@@ -142,15 +124,34 @@ $(document).ready(function()
 		{
 			var rs = results.rows;
 			
-			$('#dd_header > h1').empty().append(rs.item(0).TITLE);
+			var itemt = rs.item(0);
+			
+			$('#dd_header > h1').empty().append(itemt.TITLE);
+			
 			for (var i = 0; i < rs.length; i++)
 			{
 				var item = rs.item(i);
 				
-				
+				$('#dd_cap_image' + item.BRANCH_ID)
+					.attr('src', 'data:image/jpeg;base64,' + item.IMAGE)
+					.attr('border', '0')
+					.addClass('.captured_image');
 			}
+			
+			$('#dd_date')		.empty().append(itemt.POSTING_DATE);
+			$('#dd_map_zone')	.empty().append(itemt.LOCATE);
+			$('#dd_school')		.empty().append(itemt.SCHOOL);
+			$('#dd_style')		.empty().append(itemt.STYLE);
+			$('#dd_organ')		.empty().append(itemt.ORGAN_ID);
+			$('#dd_flowers')	.empty().append(itemt.USE_FLOWER_ID);
+			$('#dd_tools')		.empty().append(itemt.USE_TOOL_ID);
+			$('#dd_appeal')		.empty().append(itemt.APPEAL);
+			$('#dd_check_point').empty().append(itemt.CHECK_POINT);
 		});
 		
+		stockHtml = $('#my_datas > ul').html();
+		$('#my_datas > ul').empty();
+
 	});
 
 	// 左スワイプ
@@ -158,6 +159,12 @@ $(document).ready(function()
 	{
 		// 削除ボタン表示
 		// TODO
+	});
+	
+	$('#data_detail').bind('pagehide', function()
+	{
+		$('#my_datas > ul').append(stockHtml);
+		stockHtml = '';
 	});
 
 });
