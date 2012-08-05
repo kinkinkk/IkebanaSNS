@@ -147,16 +147,6 @@ $(document).ready(function()
 			break;
 	}
 	
-	// イメージ拡大表示
-	$('.capture_images').bind('click', function()
-	{
-		setTimeout(function ()
-		{
-			$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
-
-			$('#vi_picture').attr('src', $(this).attr('src'));
-		}, 0);
-	});
 	init();
 });
 

@@ -27,7 +27,7 @@
 <link rel='stylesheet' href='css/main.css' />
 </head>
 <body>
-<div data-role='page' style='background: #FFFFFF;' data-fullscreen='false'>
+<div data-role='page' style='background: #FFFFFF;' data-fullscreen='false' id='main'>
 <!-- ヘッダ -->
 	<div data-role='header' data-position='fixed' data-tap-toggle='false' id='sub_menu'></div>
 
@@ -252,9 +252,19 @@
 		<a href='#' id='call' data-role='button' data-theme='b'>決 定</a>
 	</div>
 </div>
+<div data-role='page' style='background: #FFFFFF;' data-add-back-btn='true' id='data_detail'>
+<!-- ヘッダ -->
+	<div data-role='header' id='dd_header'><h1></h1></div>
+
+<!-- コンテンツ -->
+	<div data-role='content' id='dd_content'></div>
+	
+</div>
 
 <!-- 通知 -->
 <div id='notification'></div>
+
+
 
 </body>
 </html>
