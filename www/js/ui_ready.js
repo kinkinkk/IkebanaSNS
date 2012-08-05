@@ -25,16 +25,6 @@ $(document).bind('mobileinit', function()
 // pageinit時
 $(document).bind('pageinit', function()
 {
-	var nowShowMenu = '#content_home';
-	
-	$('a[data-iconpos=\'top\']').bind('vclick', function()
-	{
-		$(nowShowMenu).hide().trigger('hideLayout');
-		nowShowMenu = '#' + $(this).attr('id').replace('lnk', 'content');
-		$(nowShowMenu).show().trigger('showLayout');
-	});
-
-	$('#lnk_home').click();
 	
 
 });

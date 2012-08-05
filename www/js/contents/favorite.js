@@ -1,5 +1,5 @@
-// pageinit時
-$(document).bind('pageinit' ,function()
+// ready時
+$(document).ready(function()
 {
 	var thisContent = '#content_favorite';
 
@@ -31,7 +31,7 @@ $(document).bind('pageinit' ,function()
 
 
 		// MYリストクリック
-		$('#my_datas > ul > li a').live('vclick', function ()
+		$('#my_datas > ul > li a').live('click', function ()
 		{
 			var authoer_id = $(this).attr('id').replace('my_datas-', '');
 			
@@ -132,7 +132,14 @@ $(document).bind('pageinit' ,function()
 							'<td>' + rs.item(i).CREATE_DATE 	+ '</td>' +
 							'<td>' + rs.item(i).UPDATE_DATE 	+ '</td>' +'</tr>');*/
 			}
+			
+			//$('#my_datas > ul > li a img').wrap($('<div class=\'nailthumb-container\'></div>'));
+			
+			// サムネイル
+			//$('.nailthumb-container').nailthumb({width:70, height:70, method:'resize', fitDirection:'top left' });
+			//$('#my_datas > ul > li a img').unwrap();
 			$('#my_datas > ul').listview('refresh');
+
 			$.mobile.hidePageLoadingMsg();
 		});
 	});

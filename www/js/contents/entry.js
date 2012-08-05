@@ -1,5 +1,5 @@
-// pageinit時
-$(document).bind('pageinit', function()
+// ready時
+$(document).ready(function()
 {
 	// 初期化
 	function init()
@@ -147,14 +147,16 @@ $(document).bind('pageinit', function()
 			break;
 	}
 	
-	
-		
 	// イメージ拡大表示
 	$('.capture_images').bind('click', function()
 	{
-		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
+		setTimeout(function ()
+		{
+			$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
 
-		$('#vi_picture').attr('src', $(this).attr('src'));
+			$('#vi_picture').attr('src', $(this).attr('src'));
+		}, 0);
 	});
 	init();
 });
+
