@@ -1,19 +1,21 @@
 // ready時
 $(document).ready(function()
 {
-	var nowShowMenu = '#content_home';
+	var nowShowMenu = '#lnk_search';
 	
-	$('#lnk_home, #lnk_entry, #lnk_favorite, #lnk_search').bind('click', function()
+	$('#lnk_home, #lnk_entry, #lnk_favorite, #lnk_search').bind('vclick', function()
 	{
-		//alert('b ' + nowShowMenu);
 		var nextMenu = '#' + $(this).attr('id').replace('lnk', 'content');
+//		alert('a ' + nextMenu);
+
+		if (nextMenu == nowShowMenu) { return; }
 
 		$(nowShowMenu).hide(0, function()
 		{
 			$(nextMenu).show(0, function()
 			{
-				//alert('a ' + nowShowMenu);
 				nowShowMenu = nextMenu;
+//				alert('b ' + nowShowMenu);
 			}).trigger('showLayout');
 			
 		}).trigger('hideLayout');

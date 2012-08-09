@@ -2,18 +2,16 @@
 $(document).ready(function()
 {
 	var thisContent = '#content_favorite';
-	var stockHtml = '';
-
 
 	// コンテンツ表示時
 	$(thisContent).bind('showLayout', function()
 	{
+		$.mobile.showPageLoadingMsg();
 		
-		$('#sub_menu').append('<div data-role=\'navbar\'><ul><li><a href=\'#\' id=\'sub_menu_other\'>みんな</a></li><li><a href=\'#\' id=\'sub_menu_my\'>自分</a></li></ul></div>');
+		$('#sub_menu').html('<div data-role=\'navbar\'><ul><li><a href=\'#\' id=\'sub_menu_other\'>みんな</a></li><li><a href=\'#\' id=\'sub_menu_my\'>自分</a></li></ul></div>');
 		$('#sub_menu > div').navbar();
 		
 	
-		$('#my_datas').hide();
 		$('#sub_menu_my').click();
 
 
@@ -41,8 +39,6 @@ $(document).ready(function()
 			LIMIT 30',
 			function(tx, results)
 		{
-			$.mobile.showPageLoadingMsg();
-
 			var rs = results.rows;
 			
 			var imageTag 	= '';
@@ -61,10 +57,10 @@ $(document).ready(function()
 				textTag += 	'<p class=\'ui-li-aside\'>'  + item.POSTING_DATE + '</p>';
 				
 
-				$('#my_datas > ul').append('<li><a href=\'#data_detail\' data-transition=\'slide\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>');
+				$('#my_datas > ul').append('<li><a href=\'#data_detail\' data-transition=\'pop\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>');
 				
 			}
-			
+
 			//$('#my_datas > ul > li a img').wrap($('<div class=\'nailthumb-container\'></div>'));
 			
 			// サムネイル
@@ -98,10 +94,10 @@ $(document).ready(function()
 	// MYリストクリック
 	$('#my_datas > ul > li a').live('click', function ()
 	{
+		$.mobile.showPageLoadingMsg();	
+	
 		var authoer_id = $(this).attr('id').replace('my_datas-', '');
 
-		$('#dd_header > h1').empty();
-		
 		$('#dd_cap_image1, #dd_cap_image2, #dd_cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image');
 
 		_sqlExcute('\
@@ -126,7 +122,7 @@ $(document).ready(function()
 			
 			var itemt = rs.item(0);
 			
-			$('#dd_header > h1').empty().append(itemt.TITLE);
+			$('#dd_header > h1').empty().html(itemt.TITLE);
 			
 			for (var i = 0; i < rs.length; i++)
 			{
@@ -147,10 +143,10 @@ $(document).ready(function()
 			$('#dd_tools')		.empty().append(itemt.USE_TOOL_ID);
 			$('#dd_appeal')		.empty().append(itemt.APPEAL);
 			$('#dd_check_point').empty().append(itemt.CHECK_POINT);
+			
+			$.mobile.hidePageLoadingMsg();
 		});
 		
-		stockHtml = $('#my_datas > ul').html();
-		$('#my_datas > ul').empty();
 
 	});
 
@@ -159,12 +155,6 @@ $(document).ready(function()
 	{
 		// 削除ボタン表示
 		// TODO
-	});
-	
-	$('#data_detail').bind('pagehide', function()
-	{
-		$('#my_datas > ul').append(stockHtml);
-		stockHtml = '';
 	});
 
 });
