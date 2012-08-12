@@ -18,6 +18,9 @@ $(document).bind('mobileinit', function()
 	//$.mobile.page.prototype.options.keepNative 				= '.data-role-none';
 	// デフォルトのAjaxページ遷移のトランジション
 	$.mobile.defaultTransition 								= 'slide';
+	
+//	$.mobile.selectmenu.prototype.options.icon 				= 'chevron-down';
+	
 });
 
 

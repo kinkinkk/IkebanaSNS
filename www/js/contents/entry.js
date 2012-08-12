@@ -28,20 +28,7 @@ $(document).ready(function()
 		
 	}
 	
-	
 
-	setTimeout(function () 
-	{
-		$('div > input[type=\'text\'], div > textarea').map(function() 
-		{
-			if ($(this).parent().children('label').html() != null)
-			{
-				$(this).attr('placeholder', $(this).parent().children('label').html() +'を入力してください。');
-			}
-		});
-	}, 0);
-	
-	
 	$('#posting').click(function ()
 	{
 		var seqAuthoerImages = 1;
@@ -128,8 +115,7 @@ $(document).ready(function()
 			function ()
 			{
 				// クリア
-				init();
-				_calert('投稿しました', null, '投稿完了');
+				_calert('投稿しました', function () { init(); }, '投稿完了');
 			}
 		);
 	});

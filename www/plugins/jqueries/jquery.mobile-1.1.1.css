@@ -830,12 +830,13 @@ a.ui-link-inherit {
 }
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
+/*
 .ui-icon-alt {
 	background: 						#fff;
 	background: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
 	background-repeat: no-repeat;
-}
+}*/
 /* HD/"retina" sprite
 -----------------------------------------------------------------------------------------------------------*/
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
@@ -854,7 +855,7 @@ a.ui-link-inherit {
 		background-size: 776px 18px;
 	}
 	.ui-icon-alt {
-		background-image: url(images/icons-36-black.png);
+		//background-image: url(images/icons-36-black.png);
 	}
 }
 /* plus minus */

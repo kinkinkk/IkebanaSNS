@@ -2,7 +2,7 @@
 $(document).ready(function()
 {
 	var thisContent = '#content_favorite';
-
+	
 	// コンテンツ表示時
 	$(thisContent).bind('showLayout', function()
 	{
@@ -43,6 +43,9 @@ $(document).ready(function()
 			
 			var imageTag 	= '';
 			var textTag 	= '';
+			
+			var addHtml  	= '';
+			
 			for (var i = 0; i < rs.length; i++)
 			{
 				var item 	= rs.item(i);
@@ -56,11 +59,11 @@ $(document).ready(function()
 				textTag += 	'<p>'  + item.SCHOOL + '</p>';
 				textTag += 	'<p class=\'ui-li-aside\'>'  + item.POSTING_DATE + '</p>';
 				
-
-				$('#my_datas > ul').append('<li><a href=\'#data_detail\' data-transition=\'pop\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>');
+				addHtml += '<li><a href=\'#data_detail\' data-transition=\'pop\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>';
 				
 			}
-
+			$('#my_datas > ul').html(addHtml);
+			
 			//$('#my_datas > ul > li a img').wrap($('<div class=\'nailthumb-container\'></div>'));
 			
 			// サムネイル
@@ -92,10 +95,10 @@ $(document).ready(function()
 	});
 	
 	// MYリストクリック
-	$('#my_datas > ul > li a').live('click', function ()
+	$('#my_datas > ul > li a').live('vclick', function ()
 	{
 		$.mobile.showPageLoadingMsg();	
-	
+		
 		var authoer_id = $(this).attr('id').replace('my_datas-', '');
 
 		$('#dd_cap_image1, #dd_cap_image2, #dd_cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image');
@@ -122,7 +125,7 @@ $(document).ready(function()
 			
 			var itemt = rs.item(0);
 			
-			$('#dd_header > h1').empty().html(itemt.TITLE);
+			$('#dd_header > h1').html(itemt.TITLE);
 			
 			for (var i = 0; i < rs.length; i++)
 			{
@@ -134,15 +137,15 @@ $(document).ready(function()
 					.addClass('.captured_image');
 			}
 			
-			$('#dd_date')		.empty().append(itemt.POSTING_DATE);
-			$('#dd_map_zone')	.empty().append(itemt.LOCATE);
-			$('#dd_school')		.empty().append(itemt.SCHOOL);
-			$('#dd_style')		.empty().append(itemt.STYLE);
-			$('#dd_organ')		.empty().append(itemt.ORGAN_ID);
-			$('#dd_flowers')	.empty().append(itemt.USE_FLOWER_ID);
-			$('#dd_tools')		.empty().append(itemt.USE_TOOL_ID);
-			$('#dd_appeal')		.empty().append(itemt.APPEAL);
-			$('#dd_check_point').empty().append(itemt.CHECK_POINT);
+			$('#dd_date')		.html(itemt.POSTING_DATE);
+			$('#dd_map_zone')	.html(itemt.LOCATE);
+			$('#dd_school')		.html(itemt.SCHOOL);
+			$('#dd_style')		.html(itemt.STYLE);
+			$('#dd_organ')		.html(itemt.ORGAN_ID);
+			$('#dd_flowers')	.html(itemt.USE_FLOWER_ID);
+			$('#dd_tools')		.html(itemt.USE_TOOL_ID);
+			$('#dd_appeal')		.html(itemt.APPEAL);
+			$('#dd_check_point').html(itemt.CHECK_POINT);
 			
 			$.mobile.hidePageLoadingMsg();
 		});
@@ -156,5 +159,10 @@ $(document).ready(function()
 		// 削除ボタン表示
 		// TODO
 	});
+
+	$(thisContent).bind('hideviewimage', function ()
+	{
+	});
+
 
 });

@@ -24,8 +24,21 @@ $(document).ready(function()
 	$('#lnk_home').click();
 
 
+	setTimeout(function () 
+	{
+		$('div > input[type=\'text\'], div > textarea').map(function() 
+		{
+			if ($(this).prev('label').html() != null)
+			{
+				$(this).attr('placeholder', $(this).prev('label').children(':not(.ui-icon-alt, .ui-icon)').html() + 'を入力してください。');
+			}
+		});
+	}, 0);
+
+
+	var tmpContents = '';
 	// イメージダイアログ表示
-	$('.capture_images').bind('click', function()
+	$('.capture_images').bind('vclick', function()
 	{
 		if ($(this).attr('src') == '') { return; }
 	
@@ -34,8 +47,12 @@ $(document).ready(function()
 		$('#vi_picture').attr('src', $(this).attr('src'));
 	});
 	// イメージダイアログ閉じるボタンを押下
-	$('#vi_exit').bind('click', function()
+	$('#vi_exit').bind('vclick', function()
 	{
 		$('#vi_picture').attr('src', '');
+		
+		$('#view_image').dialog('close');
+			
+		$(nowShowMenu).trigger('hideviewimage');
 	});
 });

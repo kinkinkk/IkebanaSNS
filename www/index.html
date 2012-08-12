@@ -5,7 +5,8 @@
 <meta charset='utf-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' />
 <script type='text/javascript' charset='utf-8' src='plugins/jqueries/jquery-1.7.2.min.js'></script>
-<link rel='stylesheet' type='text/css' href='plugins/jqueries/jquery.mobile-1.1.1.min.css' />
+<link rel='stylesheet' type='text/css' href='plugins/jqueries/jquery.mobile-1.1.1.css' />
+<link rel='stylesheet' type='text/css' href='plugins/jqueries/jqm-icon-pack-2.1.2-fa.css' />
 <link rel='stylesheet' type='text/css' href='plugins/jqueries/jquery.mobile.plugins/bartender/bartender.css' />
 <!-- <script type='text/javascript' charset='utf-8' src='plugins/jqueries/jquery.mobile.plugins/nailthumb/jquery.nailthumb.1.1.min.js'></script> -->
 <!-- <link rel='stylesheet' type='text/css' href='plugins/jqueries/jquery.mobile.plugins/nailthumb/jquery.nailthumb.1.1.min.css' /> -->
@@ -59,21 +60,21 @@
 						</tr>
 						<tr>
 							<td align='center'>
-								<div data-role='controlgroup' data-type='horizontal' class='cameras'>
-									<a href='#' name='pictures' id='camera1' data-theme='b' data-role='button' data-mini='true'>撮</a>
-									<a href='#' name='pictures' id='pic_select1' data-theme='b' data-role='button' data-mini='true'>選</a>
+								<div data-type='horizontal' class='cameras'>
+									<a href='#' name='pictures' id='camera1' data-theme='b' data-role='button' data-inline='true' data-icon='camera' data-iconpos='notext'></a>
+									<a href='#' name='pictures' id='pic_select1' data-theme='b' data-role='button' data-inline='true' data-icon='picture' data-iconpos='notext'></a>
 								</div>
 							</td>
 							<td align='center'>
-								<div data-role='controlgroup' data-type='horizontal' class='cameras'>
-									<a href='#' name='pictures' id='camera2' data-theme='b' data-role='button' data-mini='true'>撮</a>
-									<a href='#' name='pictures' id='pic_select2' data-theme='b' data-role='button' data-mini='true'>選</a>
+								<div data-type='horizontal' class='cameras'>
+									<a href='#' name='pictures' id='camera2' data-theme='b' data-role='button' data-inline='true' data-icon='camera' data-iconpos='notext'></a>
+									<a href='#' name='pictures' id='pic_select2' data-theme='b' data-role='button' data-inline='true' data-icon='picture' data-iconpos='notext'></a>
 								</div>
 							</td>
 							<td align='center'>
-								<div data-role='controlgroup' data-type='horizontal' class='cameras'>
-									<a href='#' name='pictures' id='camera3' data-theme='b' data-role='button' data-mini='true'>撮</a>
-									<a href='#' name='pictures' id='pic_select3' data-theme='b' data-role='button' data-mini='true'>選</a>
+								<div data-type='horizontal' class='cameras'>
+									<a href='#' name='pictures' id='camera3' data-theme='b' data-role='button' data-inline='true' data-icon='camera' data-iconpos='notext'></a>
+									<a href='#' name='pictures' id='pic_select3' data-theme='b' data-role='button' data-inline='true' data-icon='picture' data-iconpos='notext'></a>
 								</div>
 							</td>
 						</tr>
@@ -83,7 +84,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='title'>題名</label>
+						<label for='title'><span class='ui-icon-alt ui-icon-flagi'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>題名</span></label>
 						<input type='text' id='title' value='' maxlength='100' />
 					</div>
 				</td>
@@ -91,7 +92,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='day'>日付</label>
+						<label for='day'><span class='ui-icon-alt ui-icon-calendari'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>投稿日付</span></label>
 						<fieldset data-role='controlgroup' data-type='horizontal'>
 							<select id='year' data-theme='b' data-mini='true'></select>
 							<select id='month' data-theme='b' data-mini='true'>
@@ -119,7 +120,7 @@
 						<tr>
 							<td>
 								<div data-role='fieldcontain'>
-									<label for='location_use'>場所の登録</label>
+									<label for='location_use'><span class='ui-icon-alt ui-icon-mappin'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>場所の登録</span></label>
 									<select name='slider' id='location_use' data-role='slider' data-mini='true'>
 										<option value='off'>しない</option>
 										<option value='on'>する</option>
@@ -136,7 +137,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='school'>流派</label>
+						<label for='school'><span class='ui-icon-alt ui-icon-home'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>流派</span></label>
 						<input type='text' id='school' value='' maxlength='100' data-inline='true' />
 					</div>
 				</td>
@@ -144,7 +145,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='style'>花態</label>
+						<label for='style'><span class='ui-icon-alt ui-icon-apple'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>花態</span></label>
 						<input type='text' id='style' value='' maxlength='100' data-inline='true' />
 					</div>
 				</td>
@@ -152,7 +153,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='organ'>花器</label>
+						<label for='organ'><span class='ui-icon-inbox'>&nbsp;</span><span>花器</span></label>
 						<select id='organ' data-theme='b' data-inline='true' data-mini='true'>
 							<option value='0'>選択</option>
 							<option value='999'>テスト</option>
@@ -166,7 +167,7 @@
 						<tr>
 							<td style='width: 50%;'>
 								<div data-role='fieldcontain'>
-									<label for='flowers'>花材</label>
+									<label for='flowers'><span class='ui-icon-leaf'>&nbsp;</span><span>花材</span></label>
 									<select id='flowers' data-theme='b' data-inline='true' data-mini='true'>
 										<option value='0'>選択</option>
 										<option value='999'>テスト</option>
@@ -175,7 +176,7 @@
 							</td>
 							<td style='width: 50%;'>
 								<div data-role='fieldcontain'>
-									<label for='tools'>道具</label>
+									<label for='tools'><span class='ui-icon-wrench'>&nbsp;</span><span>道具</span></label>
 									<select id='tools' data-theme='b' data-inline='true' data-mini='true'>
 										<option value='0'>選択</option>
 										<option value='999'>テスト</option>
@@ -189,7 +190,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='appeal'>アピールポイント</label>
+						<label for='appeal'><span class='ui-icon-ok'>&nbsp;</span><span>アピールポイント</span></label>
 						<input type='text' id='appeal' value='' maxlength='100' />
 					</div>
 				</td>
@@ -197,7 +198,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='check_point'>反省点</label>
+						<label for='check_point'><span class='ui-icon-tint'>&nbsp;</span><span>反省点</span></label>
 						<textarea id='check_point' maxlength='1000'></textarea>
 					</div>
 				</td>
@@ -207,7 +208,7 @@
 			</tr>
 			<tr>
 				<td align='center'>
-					<a href='#' id='posting' data-theme='b' data-icon='check' data-role='button' data-iconpos='right' data-mini='true'>投 稿</a>
+					<a href='#' id='posting' data-theme='b' data-icon='share' data-role='button' data-iconpos='right' data-mini='true'>投 稿</a>
 				</td>
 			</tr>
 		</table>
@@ -229,10 +230,10 @@
 	<div data-role='footer' data-position='fixed' data-tap-toggle='false' data-id='bartender-footer' id='menu'>
 		<div data-role='navbar' data-grid='c'>
 			<ul class='apple-navbar-ui comboSprite'>
-				<li><a href='#' id='lnk_home' data-icon='list'>一覧</a></li>
-				<li><a href='#' id='lnk_entry' data-icon='entry'>撮影登録</a></li>
-				<li><a href='#' id='lnk_favorite' data-icon='favorite'>お気に入り</a></li>
-				<li><a href='#' id='lnk_search' data-icon='search'>検索<span class="ui-li-count">10</span></a></li>
+				<li><a href='#' id='lnk_home' data-icon='list_menu'>一覧</a></li>
+				<li><a href='#' id='lnk_entry' data-icon='entry_menu'>撮影登録</a></li>
+				<li><a href='#' id='lnk_favorite' data-icon='favorite_menu'>お気に入り</a></li>
+				<li><a href='#' id='lnk_search' data-icon='search_menu'>検索<span class="ui-li-count">10</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -242,12 +243,12 @@
 <div data-role='dialog' id='view_image'>
 	<div data-role='content' align='center'>
 		<img id='vi_picture' src='' class='picture' />
-		<a href='#' id='vi_exit' data-role='button' data-theme='b' data-rel='back'>戻 る</a>
+		<a href='#' id='vi_exit' data-role='button' data-theme='b'>戻 る</a>
 	</div>
 </div>
-<div data-role='dialog' id='first_dialog'>
+<div data-role='dialog' id='first_dialog' data-dom-cache='true'>
 	<div data-role='content'>
-		<label for='nickname'>ニックネーム</label>
+		<label for='nickname'><span class='ui-icon-user'>&nbsp;</span><span>ニックネーム</span></label>
 		<input type='text' id='nickname' value='' maxlength='100' />
 		<a href='#' id='call' data-role='button' data-theme='b'>決 定</a>
 	</div>
@@ -273,7 +274,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='dd_date'>日付</label>
+						<label for='dd_date'><span class='ui-icon-alt ui-icon-calendari'>&nbsp;&nbsp;&nbsp;&nbsp;</span>投稿日付</label><br />&nbsp;&nbsp;
 						<label id='dd_date'></label>
 					</div>
 				</td>
@@ -281,7 +282,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='dd_map_zone'>場所</label>
+						<label for='dd_map_zone'><span class='ui-icon-alt ui-icon-mappin'>&nbsp;&nbsp;&nbsp;&nbsp;</span>場所</label><br />&nbsp;&nbsp;
 						<div id='dd_map_zone' class='map_zone'></div>
 					</div>
 				</td>
@@ -289,7 +290,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='dd_school'>流派</label>
+						<label for='dd_school'><span class='ui-icon-alt ui-icon-home'>&nbsp;&nbsp;&nbsp;&nbsp;</span>流派</label><br />&nbsp;&nbsp;
 						<label id='dd_school'></label>
 					</div>
 				</td>
@@ -297,7 +298,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='dd_style'>花態</label>
+						<label for='dd_style'><span class='ui-icon-alt ui-icon-apple'>&nbsp;&nbsp;&nbsp;&nbsp;</span>花態</label><br />&nbsp;&nbsp;
 						<label id='dd_style'></label>
 					</div>
 				</td>
@@ -305,7 +306,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='dd_organ'>花器</label>
+						<label for='dd_organ'><span class='ui-icon-inbox'>&nbsp;</span>花器</label><br />&nbsp;&nbsp;
 						<label id='dd_organ'></label>
 					</div>
 				</td>
@@ -316,13 +317,13 @@
 						<tr>
 							<td style='width: 50%;'>
 								<div data-role='fieldcontain'>
-									<label for='dd_flowers'>花材</label>
+									<label for='dd_flowers'><span class='ui-icon-leaf'>&nbsp;</span>花材</label><br />&nbsp;&nbsp;
 									<label id='dd_flowers'></label>
 								</div>
 							</td>
 							<td style='width: 50%;'>
 								<div data-role='fieldcontain'>
-									<label for='dd_tools'>道具</label>
+									<label for='dd_tools'><span class='ui-icon-wrench'>&nbsp;</span>道具</label><br />&nbsp;&nbsp;
 									<label id='dd_tools'></label>
 								</div>
 							</td>
@@ -333,7 +334,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='dd_appeal'>アピールポイント</label>
+						<label for='dd_appeal'><span class='ui-icon-ok'>&nbsp;</span>アピールポイント</label><br />&nbsp;&nbsp;
 						<label id='dd_appeal'></label>
 					</div>
 				</td>
@@ -341,7 +342,7 @@
 			<tr>
 				<td align='left'>
 					<div data-role='fieldcontain'>
-						<label for='dd_check_point'>反省点</label>
+						<label for='dd_check_point'><span class='ui-icon-tint'>&nbsp;</span>反省点</label><br />&nbsp;&nbsp;
 						<label id='dd_check_point'></label>
 					</div>
 				</td>
