@@ -30,7 +30,7 @@ $(document).ready(function()
 		{
 			if ($(this).prev('label').html() != null)
 			{
-				$(this).attr('placeholder', $(this).prev('label').children(':not(.ui-icon-alt, .ui-icon)').html() + 'を入力してください。');
+				$(this).attr('placeholder', $(this).prev('label').children(':not(.ui-icon-al, .ui-icon-alt, .ui-icon)').html() + 'を入力してください。');
 			}
 		});
 	}, 0);
