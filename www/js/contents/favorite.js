@@ -97,9 +97,12 @@ $(document).ready(function()
 	// MYリストクリック
 	$('#my_datas > ul > li a').live('vclick', function ()
 	{
-		$.mobile.showPageLoadingMsg();	
 		
 		var authoer_id = $(this).attr('id').replace('my_datas-', '');
+		
+		if (authoer_id === undefined) { return; }
+
+		$.mobile.showPageLoadingMsg();
 
 		$('#dd_cap_image1, #dd_cap_image2, #dd_cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image');
 
@@ -154,10 +157,21 @@ $(document).ready(function()
 	});
 
 	// 左スワイプ
-	$('#my_datas > ul > li a').live('swipeleft', function ()
+	$('a[href=\'#data_detail\']').live('swipeleft', function ()
 	{
 		// 削除ボタン表示
 		// TODO
+		
+		_confirm(
+			'削除しますか？',
+			function(selectedButton)
+			{
+				if (selectedButton == 1)
+				{
+					alert('削除');
+				}
+			},
+			'削除確認', '削除,キャンセル' );
 	});
 
 	$(thisContent).bind('hideviewimage', function ()

@@ -135,3 +135,15 @@ function _calert(message, alertCallback, title, buttonName)
 		alert(message);
 	}
 }
+
+function _confirm(message, alertCallback, title, buttonNames)
+{
+	if (_uuID != 'none')
+	{
+		navigator.notification.confirm(message, alertCallback, title, buttonNames);
+	}
+	else 
+	{
+		alert(message);
+	}
+}
