@@ -10,7 +10,6 @@ $(document).ready(function()
 		
 		$('#sub_menu').html('<div data-role=\'navbar\'><ul><li><a href=\'#\' id=\'sub_menu_other\'>みんな</a></li><li><a href=\'#\' id=\'sub_menu_my\'>自分</a></li></ul></div>');
 		$('#sub_menu > div').navbar();
-		
 	
 		$('#sub_menu_my').click();
 
@@ -59,17 +58,16 @@ $(document).ready(function()
 				textTag += 	'<p>'  + item.SCHOOL + '</p>';
 				textTag += 	'<p class=\'ui-li-aside\'>'  + item.POSTING_DATE + '</p>';
 				
-				addHtml += '<li><a href=\'#data_detail\' data-transition=\'pop\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>';
+				addHtml += '<li><a href=\'#data_detail\' data-transition=\'slide\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>';
 				
 			}
-			$('#my_datas > ul').html(addHtml);
+			$('#my_datas > ul').html(addHtml).listview('refresh');
 			
 			//$('#my_datas > ul > li a img').wrap($('<div class=\'nailthumb-container\'></div>'));
 			
 			// サムネイル
 			//$('.nailthumb-container').nailthumb({width:70, height:70, method:'resize', fitDirection:'top left' });
 			//$('#my_datas > ul > li a img').unwrap();
-			$('#my_datas > ul').listview('refresh');
 
 			$.mobile.hidePageLoadingMsg();
 		});
@@ -82,13 +80,13 @@ $(document).ready(function()
 	});
 
 
-	$('#sub_menu_other').live('click', function ()
+	$('#sub_menu_other').live('vclick', function ()
 	{
 		$('#my_datas').hide();
 		$('#other_datas').show();
 	});
 
-	$('#sub_menu_my').live('click', function ()
+	$('#sub_menu_my').live('vclick', function ()
 	{
 		$('#my_datas').show();
 		$('#other_datas').hide();
@@ -145,7 +143,7 @@ $(document).ready(function()
 			$('#dd_school')		.html(itemt.SCHOOL);
 			$('#dd_style')		.html(itemt.STYLE);
 			$('#dd_organ')		.html(itemt.ORGAN_ID);
-			$('#dd_flowers')	.html(itemt.USE_FLOWER_ID);
+			$('#dd_flowers')		.html(itemt.USE_FLOWER_ID);
 			$('#dd_tools')		.html(itemt.USE_TOOL_ID);
 			$('#dd_appeal')		.html(itemt.APPEAL);
 			$('#dd_check_point').html(itemt.CHECK_POINT);
@@ -157,21 +155,53 @@ $(document).ready(function()
 	});
 
 	// 左スワイプ
-	$('a[href=\'#data_detail\']').live('swipeleft', function ()
+	$('a[href=\'#data_detail\']').live('taphold', function ()
 	{
 		// 削除ボタン表示
 		// TODO
-		
-		_confirm(
-			'削除しますか？',
-			function(selectedButton)
-			{
-				if (selectedButton == 1)
+		var delTarget = $(this);
+	
+		setTimeout(function()
+		{
+			var targetDelTitle = delTarget.children('h3').html();
+			_confirm(
+				targetDelTitle + 'を削除しますか？',
+				function(selectedButton)
 				{
-					alert('削除');
-				}
-			},
-			'削除確認', '削除,キャンセル' );
+					if (selectedButton == 1)
+					{
+						// 削除実行
+						var authoer_id = delTarget.attr('id').replace('my_datas-', '');
+						
+						_tranQeuries(
+							function (tx)
+							{
+								tx.executeSql('DELETE FROM AUTHOER_IMAGES 	WHERE ID = ? ', [authoer_id]);
+								tx.executeSql('DELETE FROM AUTHOERS 			WHERE ID = ? ', [authoer_id]);
+								
+								// 通信
+								
+							},
+							function (err)
+							{
+								console.log(err);
+								_calert(targetDelTitle + 'の削除に失敗しました', null, 'エラー');
+							},
+							function ()
+							{
+								// クリア
+								//_calert(targetDelTitle + 'を削除しました', function () { $(thisContent).trigger('showLayout'); }, '削除完了');
+								$(thisContent).trigger('showLayout');
+							}
+						);
+						
+					}
+				},
+				'削除確認', '削除,キャンセル' );
+	
+				delTarget.trigger('vmouseup');
+
+		}, 200);
 	});
 
 	$(thisContent).bind('hideviewimage', function ()

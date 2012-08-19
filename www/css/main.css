@@ -3,6 +3,8 @@
 body {
 }
 
+a { -webkit-touch-callout: none; }
+
 table.entry {
 	border-collapse: 		separate;
 	border-spacing: 		0px;

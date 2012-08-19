@@ -118,7 +118,7 @@ code {
 	background-image: none; 
 	height: 22px; 
 	margin: 0 0 22px; 
-	left: 9px !important; /* need to override JQM 1.1.*/ 
+	left: 6px !important; /* need to override JQM 1.1.*/ 
 	top: 0 !important; 
 	width: 100%; 
 	overflow: visible !important; 
