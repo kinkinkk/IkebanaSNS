@@ -178,7 +178,6 @@ $(document).ready(function()
 							{
 								tx.executeSql('DELETE FROM AUTHOER_IMAGES 	WHERE ID = ? ', [authoer_id]);
 								tx.executeSql('DELETE FROM AUTHOERS 			WHERE ID = ? ', [authoer_id]);
-								
 								// 通信
 								
 							},
@@ -194,7 +193,6 @@ $(document).ready(function()
 								$(thisContent).trigger('showLayout');
 							}
 						);
-						
 					}
 				},
 				'削除確認', '削除,キャンセル' );

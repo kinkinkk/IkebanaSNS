@@ -44,6 +44,7 @@ $(document).ready(function()
 		_tranQeuries(
 			function (tx)
 			{
+			
 				var isAuthoerImageIns = false;
 				for (var cd in _captureDatas)
 				{
@@ -78,6 +79,7 @@ $(document).ready(function()
 						 \'AUTHOER_IMAGES_ID\',\
 						 \'POSTING_DATE\',\
 						 \'LOCATE\',\
+						 \'SCHOOL_ID\',\
 						 \'SCHOOL\',\
 						 \'STYLE\',\
 						 \'ORGAN_ID\',\
@@ -86,13 +88,14 @@ $(document).ready(function()
 						 \'APPEAL\',\
 						 \'CHECK_POINT\',\
 						 \'CREATE_DATE\',\
-						 \'UPDATE_DATE\') VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
+						 \'UPDATE_DATE\') VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
 						 [
 						  _userID, 
 						  $('#title').val(), 
 						  seqAuthoerImages, 
 						  _getNowYear() + '/' + $('#month :selected').val() + '/' + $('#day :selected').val(),
-						  _locateInfo, 
+						  _locateInfo,
+						  null,
 						  $('#school').val(), 
 						  $('#style').val(), 
 						  $('#organ :selected').val(), 
@@ -103,7 +106,7 @@ $(document).ready(function()
 						  _getNowDateTime(), 
 						  null
 						 ]);
-				
+
 				// 通信
 				
 			},

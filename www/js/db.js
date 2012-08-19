@@ -5,7 +5,7 @@ var _objDB = openDatabase('IkebanaLocalDB', '1.0', 'IkebanaLocal用DB', 5000000)
 // DB接続
 // データベースの作成
 _tranQeuries(
-	function (tx) 
+	function (tx)
 	{
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS USERS\
@@ -17,7 +17,7 @@ _tranQeuries(
 					IMAGE BLOB,\
 					CREATE_DATE TEXT,\
 					UPDATE_DATE TEXT\
-				)");
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS AUTHOERS\
 				(\
@@ -27,6 +27,7 @@ _tranQeuries(
 					AUTHOER_IMAGES_ID INTEGER,\
 					POSTING_DATE TEXT,\
 					LOCATE TEXT DEFAULT 'null',\
+					SCHOOL_ID INTEGER DEFAULT null,\
 					SCHOOL TEXT,\
 					STYLE TEXT,\
 					ORGAN_ID INTEGER DEFAULT null,\
@@ -38,7 +39,7 @@ _tranQeuries(
 					UPDATE_DATE TEXT DEFAULT 'null',\
 					FOREIGN KEY (USER_ID)\
 					REFERENCES USERS (ID)\
-				)");
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS AUTHOER_IMAGES\
 				(\
@@ -52,13 +53,20 @@ _tranQeuries(
 					ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\
 					SERVER_AUTHOER_ID INTEGER NOT NULL,\
 					CONTENT TEXT\
-				)");
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS FAVORITES\
 				(\
 					ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\
 					SERVER_AUTHOER_ID INTEGER NOT NULL UNIQUE\
-				)");
+				);");
+		tx.executeSql("\
+				CREATE TABLE IF NOT EXISTS SCHOOLS\
+				(\
+					ID INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,\
+					NAME TEXT NOT NULL,\
+					NAME_KANA TEXT NOT NULL\
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS FLOWERS\
 				(\
@@ -67,21 +75,21 @@ _tranQeuries(
 					NAME_KANA TEXT NOT NULL,\
 					SEASON_MONTH NUMERIC NOT NULL,\
 					IMAGE BLOB\
-				)");
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS ORGANS\
 				(\
 					ID INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,\
 					NAME TEXT NOT NULL,\
 					IMAGE BLOB\
-				)");
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS TOOLS\
 				(\
 					ID INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,\
 					NAME TEXT NOT NULL,\
 					IMAGE BLOB\
-				)");
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS USE_FLOWERS\
 				(\
@@ -89,7 +97,7 @@ _tranQeuries(
 					FLOWER_ID INTEGER NOT NULL,\
 					FOREIGN KEY (FLOWER_ID)\
 					REFERENCES FLOWERS (ID)\
-				)");
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS USE_ORGANS\
 				(\
@@ -97,7 +105,7 @@ _tranQeuries(
 					ORGAN_ID INTEGER NOT NULL,\
 					FOREIGN KEY (ORGAN_ID)\
 					REFERENCES ORGANS (ID)\
-				)");
+				);");
 		tx.executeSql("\
 				CREATE TABLE IF NOT EXISTS USE_TOOLS\
 				(\
@@ -105,27 +113,28 @@ _tranQeuries(
 					TOOL_ID INTEGER NOT NULL,\
 					FOREIGN KEY (TOOL_ID)\
 					REFERENCES TOOLS (ID)\
-				)");
-		
-		
+				);");
+
+
 		tx.executeSql("CREATE INDEX IF NOT EXISTS AUTHOER_INDEXS ON AUTHOERS (USER_ID, TITLE, POSTING_DATE, LOCATE, SCHOOL, STYLE, ORGAN_ID);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS AUTHOER_IMAGE_INDEXS ON AUTHOER_IMAGES (ID);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS COMMENT_INDEXS ON COMMENTS (ID, SERVER_AUTHOER_ID);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS FAVORITE_INDEXS ON FAVORITES (ID, SERVER_AUTHOER_ID);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS FLOWER_INDEXS ON FLOWERS (ID, NAME, NAME_KANA, SEASON_MONTH);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS ORGAN_INDEXS ON ORGANS (ID, NAME);");
+		tx.executeSql("CREATE INDEX IF NOT EXISTS SCHOOL_INDEXS ON SCHOOLS (ID, NAME_KANA, NAME);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS TOOL_INDEXS ON TOOLS (ID, NAME);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS USE_FLOWER_INDEXS ON USE_FLOWERS (ID);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS USE_ORGAN_INDEXS ON USE_ORGANS (ID);");
 		tx.executeSql("CREATE INDEX IF NOT EXISTS USE_TOOL_INDEXS ON USE_TOOLS (ID);");
-		
-	}, 
+
+	},
 	// 異常時
 	function (err)
 	{
 		console.log(err);
 		_calert('データ作成時にエラーが発生しました。', null, 'エラー');
-	}, 
+	},
 	// 成功時
 	function ()
 	{
@@ -142,13 +151,13 @@ function _tranQeury(sql, sqlArg, endedMethod)
 		function(tx)
 		{
 			tx.executeSql(sql, sqlArg, endedMethod);
-		}, 
+		},
 		// 異常時
 		function (err)
 		{
 			console.log(err);
 			_calert('データ操作時にエラーが発生しました。', null, 'エラー');
-		}, 
+		},
 		// 成功時
 		function ()
 		{
@@ -157,10 +166,10 @@ function _tranQeury(sql, sqlArg, endedMethod)
 }
 
 // BIGEN-COMMIT用SQL実行
-function _tranQeuries(txMethod, errMethod, sucMethod)
+function _tranQeuries(tranMethod, errorMethod, successMethod)
 {
 	// SQLを実行
-	_objDB.transaction(txMethod, errMethod, sucMethod);
+	_objDB.transaction(tranMethod, errorMethod, successMethod);
 }
 
 // テーブル参照
@@ -189,7 +198,7 @@ function _insertDatas(tableName, params, params2)
 		{
 			columnNames.push(params2[i]);
 		}
-		
+
 		columns = ' (' + columnNames + ')';
 	}
 	_tranQeury('INSERT INTO ' + tableName + columns + ' VALUES (' + values.toString() + ')', params);
