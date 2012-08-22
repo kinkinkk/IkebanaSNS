@@ -20,13 +20,18 @@ $(document).ready(function()
 			SELECT \
 				AUTHOERS.*, \
 				MIN(AUTHOER_IMAGES.BRANCH_ID) AS BRANCH_ID, \
-				MIN(AUTHOER_IMAGES.IMAGE) AS IMAGE \
+				MIN(AUTHOER_IMAGES.IMAGE) AS IMAGE, \
+				SCHOOLS.NAME AS SCHOOL_NAME \
 			FROM \
 				AUTHOERS \
 			LEFT JOIN \
 				AUTHOER_IMAGES \
 			ON \
 				AUTHOERS.AUTHOER_IMAGES_ID = AUTHOER_IMAGES.ID \
+			LEFT JOIN \
+				SCHOOLS \
+			ON \
+				AUTHOERS.SCHOOL_ID = SCHOOLS.ID \
 			WHERE \
 				0 < AUTHOER_IMAGES_ID \
 			GROUP BY \
@@ -55,7 +60,7 @@ $(document).ready(function()
 				}
 				
 				textTag = 	'<h3>' + item.TITLE + '</h3>';
-				textTag += 	'<p>'  + item.SCHOOL + '</p>';
+				textTag += 	'<p>'  + item.SCHOOL_NAME + '</p>';
 				textTag += 	'<p class=\'ui-li-aside\'>'  + item.POSTING_DATE + '</p>';
 				
 				addHtml += '<li><a href=\'#data_detail\' data-transition=\'slide\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>';
@@ -108,13 +113,18 @@ $(document).ready(function()
 			SELECT \
 				AUTHOERS.*, \
 				AUTHOER_IMAGES.BRANCH_ID, \
-				AUTHOER_IMAGES.IMAGE \
+				AUTHOER_IMAGES.IMAGE, \
+				SCHOOLS.NAME AS SCHOOL_NAME \
 			FROM \
 				AUTHOERS \
 			LEFT JOIN \
 				AUTHOER_IMAGES \
 			ON \
 				AUTHOERS.AUTHOER_IMAGES_ID = AUTHOER_IMAGES.ID \
+			LEFT JOIN \
+				SCHOOLS \
+			ON \
+				AUTHOERS.SCHOOL_ID = SCHOOLS.ID \
 			WHERE \
 				AUTHOERS.ID = ' + authoer_id + ' \
 			ORDER BY \
@@ -140,7 +150,7 @@ $(document).ready(function()
 			
 			$('#dd_date')		.html(itemt.POSTING_DATE);
 			$('#dd_map_zone')	.html(itemt.LOCATE);
-			$('#dd_school')		.html(itemt.SCHOOL);
+			$('#dd_school')		.html(itemt.SCHOOL_NAME);
 			$('#dd_style')		.html(itemt.STYLE);
 			$('#dd_organ')		.html(itemt.ORGAN_ID);
 			$('#dd_flowers')		.html(itemt.USE_FLOWER_ID);

@@ -36,7 +36,6 @@ $(document).ready(function()
 	}, 0);
 
 
-	var tmpContents = '';
 	// イメージダイアログ表示
 	$('.capture_images').bind('vclick', function()
 	{

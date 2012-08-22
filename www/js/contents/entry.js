@@ -17,10 +17,10 @@ $(document).ready(function()
 		
 		$('#cap_image1, #cap_image2, #cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image').hide(0).show(0);
 
-		$('#title, #school, #style, #appeal, #check_point').val('');
+		$('#title, #school, #style, #appeal, #check_point, #school_value').val('');
 		$('#organ, #flowers, #tools').val('0');
 		$('#location_use').val('off').slider('refresh');
-		$('#map_zone').empty();
+		$('#map_zone, #school_view').empty();
 		
 		$('#year').val(_getNowYear()).selectmenu('refresh');
 		$('#month').val(_getNowMonth()).selectmenu('refresh');
@@ -40,6 +40,15 @@ $(document).ready(function()
 				seqAuthoerImages = rs.item(0).seq;
 			}
 		}, ' WHERE name=\'AUTHOER_IMAGES\'');
+		
+		var seqSchool = 1;
+		_selectDatas('sqlite_sequence', function(rs)
+		{
+			if ( 0 < rs.length )
+			{
+				seqSchool = rs.item(0).seq + 1;
+			}
+		}, ' WHERE name=\'SCHOOLS\'');
 		
 		_tranQeuries(
 			function (tx)
@@ -70,7 +79,16 @@ $(document).ready(function()
 				{
 					seqAuthoerImages = -1;
 				}
-			
+				
+				
+				var targetSchool = $('#school_value').val();
+				if (targetSchool == 'create')
+				{
+					tx.executeSql('INSERT INTO SCHOOLS (ID, NAME, NAME_KANA, BEFORE_SELECT) VALUES (?, ?, ?, ?)', [seqSchool, $('#school_view').html(), '', 1]);
+					
+					targetSchool = seqSchool;
+				}
+		
 			
 				tx.executeSql(
 					'INSERT INTO AUTHOERS \
@@ -80,7 +98,6 @@ $(document).ready(function()
 						 \'POSTING_DATE\',\
 						 \'LOCATE\',\
 						 \'SCHOOL_ID\',\
-						 \'SCHOOL\',\
 						 \'STYLE\',\
 						 \'ORGAN_ID\',\
 						 \'USE_FLOWER_ID\',\
@@ -88,15 +105,14 @@ $(document).ready(function()
 						 \'APPEAL\',\
 						 \'CHECK_POINT\',\
 						 \'CREATE_DATE\',\
-						 \'UPDATE_DATE\') VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
+						 \'UPDATE_DATE\') VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
 						 [
 						  _userID, 
 						  $('#title').val(), 
 						  seqAuthoerImages, 
 						  _getNowYear() + '/' + $('#month :selected').val() + '/' + $('#day :selected').val(),
 						  _locateInfo,
-						  null,
-						  $('#school').val(), 
+						  targetSchool, 
 						  $('#style').val(), 
 						  $('#organ :selected').val(), 
 						  $('#flowers :selected').val(), 
@@ -146,6 +162,70 @@ $(document).ready(function()
 				.append('<option value=\'' + nowYear 		+ '\'>' + nowYear 		+ '年</option>');
 			break;
 	}
+	
+	
+	// 流派ダイアログ表示
+	$('#school').bind('vclick', function()
+	{
+		// 自分の分読み込み
+		_sqlExcute('\
+			SELECT \
+				* \
+			FROM \
+				SCHOOLS \
+			ORDER BY \
+				NAME_KANA',
+			function(tx, results)
+		{
+			var rs = results.rows;
+			
+			var addHtml  	= '';
+			var textTag  	= '';
+			for (var i = 0; i < rs.length; i++)
+			{
+				var item 	= rs.item(i);
+				textTag 		= 	'<h3>' + item.NAME + '</h3>';
+				if (0 < item.NAME_KANA.length)
+				{
+					textTag 	+= 	'<p>('  + item.NAME_KANA + ')</p>';
+				}
+								
+				addHtml 	+= '<li><a href=\'#\' data-transition=\'none\' id=\'shool_datas-' + item.ID + '\'>' + textTag + '</a></li>';
+			}
+			setTimeout(function()
+			{
+				$('#school_datas > ul').html(addHtml).listview('refresh');
+			}, 100);
+		});
+	});
+
+	// 流派ダイアログ選択時
+	$('#school_datas > ul > li a').live('click', function ()
+	{
+		$('#school_view').html($(this).children('h3').html());
+		$('#school_value').val($(this).attr('id').replace('shool_datas-', ''));
+
+		$('#school_list_dialog').dialog('close');
+		$('#school_datas > ul').empty();
+		setTimeout(function()
+		{
+			$.mobile.silentScroll(100);
+		}, 200);
+	});
+	
+	// 流派ダイアログ選択時
+	$('#new_school_entry').bind('click', function()
+	{
+		$('#school_view').html($('#school_datas > form > div > input').val());
+		$('#school_value').val('create');
+	
+		$('#school_list_dialog').dialog('close');
+		$('#school_datas > ul').empty();
+		setTimeout(function()
+		{
+			$.mobile.silentScroll(100);
+		}, 200);
+	});
 	
 	init();
 });
