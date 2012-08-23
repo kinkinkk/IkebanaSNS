@@ -3,7 +3,7 @@
  * */
 
 var _uuID 			= 'none';
-var _locateInfo 	= null;
+var _locateInfo 		= null;
 var _captureDatas 	= null;
 
 
@@ -73,7 +73,8 @@ $(document).ready(function()
 				$('#location_use').bind('change', function() {
 					if ($('#location_use :selected').val() == 'on')
 					{
-						setTimeout(function () 
+					
+						setTimeout(function()
 						{
 							navigator.geolocation.getCurrentPosition(function(position)
 							{
@@ -82,36 +83,15 @@ $(document).ready(function()
 								// 経度取得
 								var longitude = position.coords.longitude;
 								
-								var latlng = new google.maps.LatLng(latitude, longitude);
-								var map = 
-									new google.maps.Map(
-											$('#map_zone').get(0),
-											{ 
-												zoom: 				16, 
-												center: 			latlng, 
-												disableDefaultUI: 	true, 
-												panControl: 		false, 
-												draggable: 			false,
-												mapTypeId: 			google.maps.MapTypeId.ROADMAP } );
-											
-								// マップにマーカー追加
-								(new google.maps.Marker({ position: latlng })).setMap(map);
-
-								google.maps.event.addListener(map, 'domready', function() {
-								alert(1);
-								});
-								
-
-								$('#map_zone').parent().parent().prev().attr('style', '-moz-border-radius: 15px;-webkit-border-radius: 15px; border-radius: 15px; margin-bottom: -3px;');
-
-								_locateInfo = latlng;
+								_locateInfo = _viewGoogleMap('#map_zone', latitude, longitude);
 							});
+							
 						}, 0);
 					}
 					else
 					{
-						$('#map_zone').empty();
-						_locateInfo = '';
+						$('#map_zone').empty().attr('style', '');
+						_locateInfo = null;
 					}
 				});
 			}

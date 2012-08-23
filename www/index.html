@@ -28,7 +28,7 @@
 <link rel='stylesheet' href='css/main.css' />
 </head>
 <body>
-<div data-role='page' style='background: #FFFFFF;' data-fullscreen='false' id='main'>
+<div data-role='page' style='background: #FFFFFF;' data-fullscreen='false' data-dom-cache='true' id='main'>
 <!-- ヘッダ -->
 	<div data-role='header' data-position='fixed' data-tap-toggle='false' id='sub_menu'></div>
 
@@ -140,7 +140,7 @@
 						<label for='school'><span class='ui-icon-alt ui-icon-home'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>流派</span></label>
 						<br />
 						<span id='school_view'></span>
-						<a href='#school_list_dialog' id='school' data-theme='b' data-icon='arrow-d' data-role='button' data-iconpos='right' data-inline='true' data-mini='true'>選択</a>
+						<a href='#' id='school' data-theme='b' data-icon='arrow-d' data-role='button' data-iconpos='right' data-inline='true' data-mini='true'>選 択</a>
 						<input type='hidden' id='school_value' value='' />
 					</div>
 				</td>
@@ -158,7 +158,7 @@
 					<div data-role='fieldcontain'>
 						<label for='organ'><span class='ui-icon-al ui-icon-inbox'>&nbsp;</span><span>花器</span></label>
 						<select id='organ' data-theme='b' data-inline='true' data-mini='true'>
-							<option value='0'>選択</option>
+							<option value='0'>選 択</option>
 							<option value='999'>テスト</option>
 						</select>
 					</div>
@@ -172,7 +172,7 @@
 								<div data-role='fieldcontain'>
 									<label for='flowers'><span class='ui-icon-al ui-icon-leaf'>&nbsp;</span><span>花材</span></label>
 									<select id='flowers' data-theme='b' data-inline='true' data-mini='true'>
-										<option value='0'>選択</option>
+										<option value='0'>選 択</option>
 										<option value='999'>テスト</option>
 									</select>
 								</div>
@@ -181,7 +181,7 @@
 								<div data-role='fieldcontain'>
 									<label for='tools'><span class='ui-icon-al ui-icon-wrench'>&nbsp;</span><span>道具</span></label>
 									<select id='tools' data-theme='b' data-inline='true' data-mini='true'>
-										<option value='0'>選択</option>
+										<option value='0'>選 択</option>
 										<option value='999'>テスト</option>
 									</select>
 								</div>
@@ -295,7 +295,7 @@
 				<td align='left'>
 					<div data-role='fieldcontain'>
 						<label for='dd_map_zone'><span class='ui-icon-alt ui-icon-mappin'>&nbsp;&nbsp;&nbsp;&nbsp;</span>場所</label><br />&nbsp;&nbsp;
-						<div id='dd_map_zone' class='map_zone'></div>
+						<div id='dd_map_zone'></div>
 					</div>
 				</td>
 			</tr>

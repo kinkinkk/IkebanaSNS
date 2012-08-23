@@ -65,11 +65,7 @@ img.picture {
 
 div.map_zone {
 	width: 					150px; 
-	height: 				80px;
-	-moz-border-radius: 	15px;
-	-webkit-border-radius: 	15px;
-	border-radius: 			15px;
-	margin-bottom: 			-3px;
+	height: 					80px;
 }
 
 

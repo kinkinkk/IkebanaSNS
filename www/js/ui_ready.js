@@ -31,3 +31,26 @@ $(document).bind('pageinit', function()
 	
 
 });
+
+// pagebeforechange時
+$(document).bind('pagebeforechange', function(event, data)
+{
+	//alert(data.toPage);
+});
+
+
+// pagehide時
+$(document).bind('pagehide', function(event, ui)
+{
+});
+
+
+// pageshow時
+$(document).bind('pageshow', function(event, ui)
+{
+	switch(ui.prevPage.attr('id'))
+	{
+		default:
+			break;
+	}
+});

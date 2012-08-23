@@ -13,8 +13,6 @@ $(document).ready(function()
 	
 		$('#sub_menu_my').click();
 
-
-
 		// 自分の分読み込み
 		_sqlExcute('\
 			SELECT \
@@ -63,7 +61,7 @@ $(document).ready(function()
 				textTag += 	'<p>'  + item.SCHOOL_NAME + '</p>';
 				textTag += 	'<p class=\'ui-li-aside\'>'  + item.POSTING_DATE + '</p>';
 				
-				addHtml += '<li><a href=\'#data_detail\' data-transition=\'slide\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>';
+				addHtml += '<li><a href=\'#\' name=\'my_datas\' id=\'my_datas-' + item.ID + '\'>' + imageTag + textTag + '</a></li>';
 				
 			}
 			$('#my_datas > ul').html(addHtml).listview('refresh');
@@ -75,6 +73,7 @@ $(document).ready(function()
 			//$('#my_datas > ul > li a img').unwrap();
 
 			$.mobile.hidePageLoadingMsg();
+			
 		});
 	});
 	
@@ -97,6 +96,8 @@ $(document).ready(function()
 		$('#other_datas').hide();
 	});
 	
+
+	
 	// MYリストクリック
 	$('#my_datas > ul > li a').live('vclick', function ()
 	{
@@ -107,7 +108,8 @@ $(document).ready(function()
 
 		$.mobile.showPageLoadingMsg();
 
-		$('#dd_cap_image1, #dd_cap_image2, #dd_cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image');
+		$('#dd_cap_image1, #dd_cap_image2, #dd_cap_image3').attr('src', '').attr('border', '1').removeClass('captured_image');
+		$('#dd_map_zone').removeClass('map_zone').attr('style', '');
 
 		_sqlExcute('\
 			SELECT \
@@ -148,8 +150,18 @@ $(document).ready(function()
 					.addClass('.captured_image');
 			}
 			
+			
+			if (itemt.LOCATE != null)
+			{
+				$('#dd_map_zone').addClass('map_zone');
+				var locate = itemt.LOCATE.split(',');
+			}
+			else
+			{
+				$('#dd_map_zone').html('位置情報登録なし');
+			}
+			
 			$('#dd_date')		.html(itemt.POSTING_DATE);
-			$('#dd_map_zone')	.html(itemt.LOCATE);
 			$('#dd_school')		.html(itemt.SCHOOL_NAME);
 			$('#dd_style')		.html(itemt.STYLE);
 			$('#dd_organ')		.html(itemt.ORGAN_ID);
@@ -159,13 +171,25 @@ $(document).ready(function()
 			$('#dd_check_point').html(itemt.CHECK_POINT);
 			
 			$.mobile.hidePageLoadingMsg();
+			
+			// 移動
+			setTimeout(function()
+			{
+				$.mobile.changePage('#data_detail', { transition: 'slide' });
+
+				if (itemt.LOCATE != null)
+				{
+					_viewGoogleMap('#dd_map_zone', locate[0], locate[1]);
+				}
+			}, 100);
+
 		});
 		
 
 	});
 
-	// 左スワイプ
-	$('a[href=\'#data_detail\']').live('taphold', function ()
+	// タップホールド
+	$('a[name=\'my_datas\']').live('taphold', function ()
 	{
 		// 削除ボタン表示
 		// TODO
@@ -218,3 +242,4 @@ $(document).ready(function()
 
 
 });
+

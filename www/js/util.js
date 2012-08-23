@@ -59,3 +59,41 @@ function _getNowDay()
 
 	return day;
 }
+
+// GOOGLEマップ作成
+function _viewGoogleMap(targetID, latitude, longitude, markerTimeLag)
+{
+	var latlng = new google.maps.LatLng(latitude, longitude);
+
+	var map =
+		new google.maps.Map(
+				$(targetID).get(0),
+				{ 
+					zoom: 				16, 
+					center: 				latlng, 
+					disableDefaultUI: 	true, 
+					panControl: 			false, 
+					draggable: 			false,
+					mapTypeId: 			google.maps.MapTypeId.ROADMAP
+				}
+		);
+	
+	if (markerTimeLag === undefined)
+	{
+		markerTimeLag = 0;
+	}
+	// マップにマーカー追加
+	setTimeout(function()
+	{
+		(new google.maps.Marker({ position: latlng })).setMap(map);
+	}, markerTimeLag);
+
+	//google.maps.event.addListener(map, 'domready', function()
+	//{
+	//	alert(1);
+	//});
+	
+
+	//$(targetID).parent().parent().prev().attr('style', '-moz-border-radius: 15px;-webkit-border-radius: 15px; border-radius: 15px; margin-bottom: -3px;');
+	return latitude + ',' + longitude;
+}

@@ -41,17 +41,17 @@ $(document).ready(function()
 	{
 		if ($(this).attr('src') == '') { return; }
 	
-		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
-
 		$('#vi_picture').attr('src', $(this).attr('src'));
+
+		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
 	});
 	// イメージダイアログ閉じるボタンを押下
 	$('#vi_exit').bind('vclick', function()
 	{
-		$('#vi_picture').attr('src', '');
-		
 		$('#view_image').dialog('close');
-			
+
+		$('#vi_picture').attr('src', '');
+
 		$(nowShowMenu).trigger('hideviewimage');
 	});
 });

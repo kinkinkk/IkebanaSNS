@@ -13,7 +13,7 @@ $(document).ready(function()
 	function init()
 	{
 		_captureDatas 	= { cap_image1: null, cap_image2: null, cap_image3: null };
-		_locateInfo 	= '';
+		_locateInfo 		= null;
 		
 		$('#cap_image1, #cap_image2, #cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image').hide(0).show(0);
 
@@ -190,12 +190,15 @@ $(document).ready(function()
 					textTag 	+= 	'<p>('  + item.NAME_KANA + ')</p>';
 				}
 								
-				addHtml 	+= '<li><a href=\'#\' data-transition=\'none\' id=\'shool_datas-' + item.ID + '\'>' + textTag + '</a></li>';
+				addHtml 	+= '<li><a href=\'#\' id=\'shool_datas-' + item.ID + '\'>' + textTag + '</a></li>';
 			}
 			setTimeout(function()
 			{
 				$('#school_datas > ul').html(addHtml).listview('refresh');
+				
 			}, 100);
+
+			$.mobile.changePage('#school_list_dialog', { transition: 'pop', role: 'dialog', showLoadMsg: false });
 		});
 	});
 
