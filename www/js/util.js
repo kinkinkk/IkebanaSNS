@@ -12,7 +12,7 @@ function _getNowDateTime()
 	var second 	= d.getSeconds();
 
 	// 1桁を2桁に変換する
-	if (month < 10) 	{month 	= '0' + month;}
+	if (month < 10) 		{month 	= '0' + month;}
 	if (day < 10) 		{day 	= '0' + day;}
 	if (hour < 10) 		{hour 	= '0' + hour;}
 	if (minute < 10) 	{minute = '0' + minute;}

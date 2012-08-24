@@ -109,7 +109,7 @@ $(document).ready(function()
 		$.mobile.showPageLoadingMsg();
 
 		$('#dd_cap_image1, #dd_cap_image2, #dd_cap_image3').attr('src', '').attr('border', '1').removeClass('captured_image');
-		$('#dd_map_zone').removeClass('map_zone').attr('style', '');
+		$('#dd_map_zone').removeClass('map_preview').attr('style', '');
 
 		_sqlExcute('\
 			SELECT \
@@ -153,7 +153,7 @@ $(document).ready(function()
 			
 			if (itemt.LOCATE != null)
 			{
-				$('#dd_map_zone').addClass('map_zone');
+				$('#dd_map_zone').addClass('map_preview');
 				var locate = itemt.LOCATE.split(',');
 			}
 			else

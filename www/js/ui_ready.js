@@ -18,7 +18,8 @@ $(document).bind('mobileinit', function()
 	//$.mobile.page.prototype.options.keepNative 				= '.data-role-none';
 	// デフォルトのAjaxページ遷移のトランジション
 	$.mobile.defaultTransition 								= 'slide';
-	
+
+	$.mobile.minScrollBack    								= 'infinity';
 //	$.mobile.selectmenu.prototype.options.icon 				= 'chevron-down';
 	
 });
@@ -29,7 +30,6 @@ $(document).bind('mobileinit', function()
 $(document).bind('pageinit', function()
 {
 	
-
 });
 
 // pagebeforechange時
@@ -44,10 +44,10 @@ $(document).bind('pagehide', function(event, ui)
 {
 });
 
-
 // pageshow時
 $(document).bind('pageshow', function(event, ui)
 {
+
 	switch(ui.prevPage.attr('id'))
 	{
 		default:

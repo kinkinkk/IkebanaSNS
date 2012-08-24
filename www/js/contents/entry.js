@@ -15,6 +15,8 @@ $(document).ready(function()
 		_captureDatas 	= { cap_image1: null, cap_image2: null, cap_image3: null };
 		_locateInfo 		= null;
 		
+		$('#map_zone').empty().attr('style', '');
+		
 		$('#cap_image1, #cap_image2, #cap_image3').attr('src', '').attr('border', '1').removeClass('.captured_image').hide(0).show(0);
 
 		$('#title, #school, #style, #appeal, #check_point, #school_value').val('');
@@ -199,6 +201,7 @@ $(document).ready(function()
 			}, 100);
 
 			$.mobile.changePage('#school_list_dialog', { transition: 'pop', role: 'dialog', showLoadMsg: false });
+
 		});
 	});
 
@@ -209,11 +212,7 @@ $(document).ready(function()
 		$('#school_value').val($(this).attr('id').replace('shool_datas-', ''));
 
 		$('#school_list_dialog').dialog('close');
-		$('#school_datas > ul').empty();
-		setTimeout(function()
-		{
-			$.mobile.silentScroll(100);
-		}, 200);
+		
 	});
 	
 	// 流派ダイアログ選択時
@@ -223,11 +222,6 @@ $(document).ready(function()
 		$('#school_value').val('create');
 	
 		$('#school_list_dialog').dialog('close');
-		$('#school_datas > ul').empty();
-		setTimeout(function()
-		{
-			$.mobile.silentScroll(100);
-		}, 200);
 	});
 	
 	init();
