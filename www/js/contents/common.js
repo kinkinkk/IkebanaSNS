@@ -43,7 +43,7 @@ $(document).ready(function()
 	
 		$('#vi_picture').attr('src', $(this).attr('src'));
 
-		$.mobile.changePage('#view_image', {transition: 'pop', role: 'dialog'});
+		$.mobile.changePage('#view_image', {transition: 'none', role: 'dialog'});
 	});
 	// イメージダイアログ閉じるボタンを押下
 	$('#vi_exit').bind('vclick', function()

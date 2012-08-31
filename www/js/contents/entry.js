@@ -167,7 +167,7 @@ $(document).ready(function()
 	
 	
 	// 流派ダイアログ表示
-	$('#school').bind('vclick', function()
+	$('#school').bind('click', function()
 	{
 		// 自分の分読み込み
 		_sqlExcute('\
@@ -200,7 +200,7 @@ $(document).ready(function()
 				
 			}, 100);
 
-			$.mobile.changePage('#school_list_dialog', { transition: 'pop', role: 'dialog', showLoadMsg: false });
+			$.mobile.changePage('#school_list_dialog', { transition: 'none', role: 'dialog', showLoadMsg: false });
 
 		});
 	});

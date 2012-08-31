@@ -99,7 +99,7 @@ $(document).ready(function()
 
 	
 	// MYリストクリック
-	$('#my_datas > ul > li a').live('vclick', function ()
+	$('#my_datas > ul > li a').live('click', function ()
 	{
 		
 		var authoer_id = $(this).attr('id').replace('my_datas-', '');
@@ -175,7 +175,7 @@ $(document).ready(function()
 			// 移動
 			setTimeout(function()
 			{
-				$.mobile.changePage('#data_detail', { transition: 'slide' });
+				$.mobile.changePage('#data_detail', { transition: 'none' });
 
 				if (itemt.LOCATE != null)
 				{
