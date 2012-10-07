@@ -186,13 +186,19 @@ $(document).ready(function()
 			for (var i = 0; i < rs.length; i++)
 			{
 				var item 	= rs.item(i);
+				var nameIndex = item.NAME_KANA;
+				
 				textTag 		= 	'<h3>' + item.NAME + '</h3>';
 				if (0 < item.NAME_KANA.length)
 				{
 					textTag 	+= 	'<p>('  + item.NAME_KANA + ')</p>';
 				}
+				else
+				{
+					nameIndex = '#';
+				}
 								
-				addHtml 	+= '<li><a href=\'#\' id=\'shool_datas-' + item.ID + '\'>' + textTag + '</a></li>';
+				addHtml 	+= '<li><a href=\'#\' id=\'shool_datas-' + item.ID + '\'><span style=\'display:none;\'>' + nameIndex + '</span>' + textTag + '</a></li>';
 			}
 			setTimeout(function()
 			{
